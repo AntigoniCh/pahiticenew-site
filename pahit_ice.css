@@ -42,7 +42,7 @@ body > * {
     color: #dd1d40;
       position: fixed;
       bottom: 5px;        /* distance from bottom */
-       left: 50%;
+       left: 45%;
       transform: translateX(-50%);
        z-index: 999;
        text-decoration: none;
@@ -58,7 +58,7 @@ drop-shadow(0.2px 0.2px 0.2px black)
   font-size: 50px;
        position: fixed;
   bottom: 5px;        /* distance from bottom */
-  left: 40%;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 999;
   text-decoration: none;
@@ -75,7 +75,7 @@ drop-shadow(0.2px 0.2px 0.2px black)
   fill: #cbe3c3; /* Bolt green */
         position: fixed;
   bottom: 5px;        /* distance from bottom */
-  left: 30%;
+  left: 38%;
   transform: translateX(-50%);
   z-index: 999;
   text-decoration: none;
@@ -103,4 +103,19 @@ drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
 
+.pin-icon {
+  width: 60px;
+  height: 60px;
+       position: fixed;
+  bottom: 5px;        /* distance from bottom */
+  left: 55%;
+  transform: translateX(-50%);
+  z-index: 999;
+  filter:
+    drop-shadow(0.2px 0.2px 0.2px black)
+    drop-shadow(0.2px 0.2px 0.2px black)
+    drop-shadow(0.2px 0.2px 0.2px black)
+    drop-shadow(0.2px 0.2px 0.2px black);
+  text-decoration: none;
 
+}
