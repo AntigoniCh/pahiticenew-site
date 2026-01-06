@@ -1,4 +1,6 @@
- * {
+html, body { height: 100%; }
+
+* {
       margin: 0;
       padding: 0;
     }
@@ -102,5 +104,6 @@ drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
+
 
 
