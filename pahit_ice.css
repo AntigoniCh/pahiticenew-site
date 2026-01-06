@@ -38,31 +38,26 @@ body > * {
 
   
   .fa-instagram {
-    font-size: 60px;
-    color: #dd1d40;
-      position: fixed;
-      bottom: 5px;        /* distance from bottom */
-       left: 45%;
-      transform: translateX(-50%);
-       z-index: 999;
-       text-decoration: none;
-           filter:
-drop-shadow(0.2px 0.2px 0.2px black)
+      font-size: 60px;
+       color: #dd1d40;
+        position: fixed;
+        bottom: 5px;        /* distance from bottom */
+        left: 44%;
+        filter:
+    drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
   }
 
   .facebook {
-  color: #2765b6;
-  font-size: 50px;
-       position: fixed;
-  bottom: 5px;        /* distance from bottom */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 999;
-  text-decoration: none;
-      filter:
+        
+        font-size: 50px;
+        color: #2765b6;
+        position: fixed;
+        bottom: 5px;        /* distance from bottom */
+        left: 50%;
+        filter:
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
@@ -70,32 +65,25 @@ drop-shadow(0.2px 0.2px 0.2px black)
 }
 
 .bolt-icon {
-   width: 120px;
-  height: 50px;
-  fill: #cbe3c3; /* Bolt green */
-        position: fixed;
-  bottom: 5px;        /* distance from bottom */
-  left: 38%;
-  transform: translateX(-50%);
-  z-index: 999;
-  text-decoration: none;
+        width: 120px;
+        height: 50px;
+         position: fixed;
+         bottom: 5px;        /* distance from bottom */
+         left: 35%;
       filter:
-       drop-shadow(0.2px 0.2px 0.2px black)
+    drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
 
 .waze-icon {
-    width: 60px;
-  height: 60px;
-       position: fixed;
-  bottom: 5px;        /* distance from bottom */
-  left: 60%;
-  transform: translateX(-50%);
-  z-index: 999;
-  text-decoration: none;
-   border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      position: fixed;
+       bottom: 5px;        /* distance from bottom */
+       left: 61%;
+    border-radius: 50%;
     filter:
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
@@ -104,19 +92,16 @@ drop-shadow(0.2px 0.2px 0.2px black)
 }
 
 .pin-icon {
-  width: 60px;
-  height: 60px;
-      
-  bottom: 5px;        /* distance from bottom */
-  left: 55%;
-  transform: translateX(-50%);
-  z-index: 999;
-  filter:
+      width: 70px;
+      height: 60px;
+      position: fixed;
+      bottom: 5px;        /* distance from bottom */
+       left: 55%;
+      filter:
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
-  text-decoration: none;
+ 
 
 }
-
