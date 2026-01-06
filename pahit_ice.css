@@ -1,4 +1,3 @@
-html, body { height: 100%; }
 
 * {
       margin: 0;
@@ -14,7 +13,7 @@ html, body { height: 100%; }
     body {
       min-height: 100svh;              
       background: url("./background2.jpg") no-repeat center center;
-       background-size: cover;   /* FIX για Samsung */
+       background-size:cover;  /* FIX για Samsung */
       background-color: #e9e3e6;
 
 
@@ -104,6 +103,7 @@ drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
+
 
 
 
