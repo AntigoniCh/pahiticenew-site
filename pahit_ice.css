@@ -12,7 +12,7 @@
     body {
       min-height: 100svh;              
       background: url("./background2.jpg") no-repeat center center;
-       background-size: cover;   /* FIX για Samsung */
+       background-size: contain;   /* FIX για Samsung */
       background-color: #e9e3e6;
 
 
@@ -102,4 +102,39 @@ body > * {
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
+.bottom-bar{
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 95vw;
+  z-index: 10;
+}
 
+/* όλα να έχουν ίδιο "κουτί" */
+.social-bottom{
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* fontawesome */
+.instagram i{ font-size: 48px; color: #dd1d40; }
+.facebook i{ font-size: 42px; color: #2765b6; }
+
+/* εικόνες */
+.bolt-icon{ width: 60px; height: auto; }
+.waze-icon{ width: 45px; }
+.pin-icon{ width: 40px; }
+
+.social-bottom i,
+.social-bottom img{
+  filter:
+    drop-shadow(0.5px 0.5px 1px black);
+}
