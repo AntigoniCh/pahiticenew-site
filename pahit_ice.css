@@ -12,7 +12,7 @@
     body {
       min-height: 100svh;              
       background: url("./background2.jpg") no-repeat center center;
-       background-size: cover;   /* FIX για Samsung */
+       background-size: contain;   /* FIX για Samsung */
       background-color: #e9e3e6;
 
 
@@ -36,72 +36,69 @@ body > * {
   z-index: 1;
 }
 
-  
-  .fa-instagram {
-      font-size: 60px;
-       color: #dd1d40;
-        position: fixed;
-        bottom: 5px;        /* distance from bottom */
-        left: 44%;
-        filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-  }
+  /* bottom icons bar */
+.bottom-bar{
+  position: fixed;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 5;
+}
 
-  .facebook {
-        
-        font-size: 50px;
-        color: #2765b6;
-        position: fixed;
-        bottom: 5px;        /* distance from bottom */
-        left: 50%;
-        filter:
+.social-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* FontAwesome icons */
+.social-bottom.instagram i{
+  font-size: 60px;
+  color: #dd1d40;
+  filter:
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
 
-.bolt-icon {
-        width: 120px;
-        height: 50px;
-         position: fixed;
-         bottom: 5px;        /* distance from bottom */
-         left: 35%;
-      filter:
+.social-bottom.facebook i{
+  font-size: 50px;
+  color: #2765b6;
+  filter:
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
 }
 
-.waze-icon {
-      width: 60px;
-      height: 60px;
-      position: fixed;
-       bottom: 5px;        /* distance from bottom */
-       left: 61%;
-    border-radius: 50%;
-    filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
+/* Images */
+.bolt-icon{
+  width: 120px;
+  height: 50px;
 }
 
-.pin-icon {
-      width: 70px;
-      height: 60px;
-      position: fixed;
-      bottom: 5px;        /* distance from bottom */
-       left: 55%;
-      filter:
+.waze-icon{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.pin-icon{
+  width: 70px;
+  height: 60px;
+}
+
+/* Shadow for all images */
+.social-bottom img{
+  display: block;
+  filter:
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black)
     drop-shadow(0.2px 0.2px 0.2px black);
- 
-
 }
