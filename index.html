@@ -3,35 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <link rel="stylesheet" href="pahit_ice.css">
+  <link rel="stylesheet" href="pahit_ice.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <title>PAHIT ICE</title>
-
 </head>
+
 <body>
-<div class="bottom-bar">
-  <a href="https://instagram.com/pahitice_ayiafyla" target="_blank" class="social-bottom instagram">
-    <i class="fa-brands fa-instagram"></i>
-  </a>
 
-  <a href="https://facebook.com/yourpage" target="_blank" class="social-bottom facebook">
-    <i class="fa-brands fa-facebook-f"></i>
-  </a>
-
-  <a href="https://food.bolt.eu" target="_blank" class="social-bottom bolt-food">
-    <img src="./bolt logo/bolt-food-seeklogo.png" class="bolt-icon">
-  </a>
-
-  <a href="https://waze.com/ul" target="_blank" class="social-bottom waze">
-    <img src="./bolt logo/waze.png" class="waze-icon">
-  </a>
-
-  <a href="https://www.google.com/maps" target="_blank" class="social-bottom maps">
-    <img src="./bolt logo/pin.png" class="pin-icon">
-  </a>
+<!-- Hamburger menu (3 lines on left) -->
+<div class="menu-btn" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
 
+<!-- Side menu -->
+<div id="sideMenu" class="side-menu">
 
+  <a href="https://instagram.com/pahitice_ayiafyla" target="_blank">
+    <i class="fa-brands fa-instagram"></i>
+    <span>Instagram</span>
+  </a>
+
+  <a href="https://facebook.com/yourpage" target="_blank">
+    <i class="fa-brands fa-facebook-f"></i>
+    <span>Facebook</span>
+  </a>
+
+  <a href="https://food.bolt.eu" target="_blank">
+    <img src="./bolt logo/bolt-food-seeklogo.png" class="menu-icon">
+    <span>Bolt Food</span>
+  </a>
+
+  <a href="https://waze.com/ul" target="_blank">
+    <img src="./bolt logo/waze.png" class="menu-icon">
+    <span>Waze</span>
+  </a>
+
+  <a href="https://www.google.com/maps" target="_blank">
+    <img src="./bolt logo/pin.png" class="menu-icon">
+    <span>Location</span>
+  </a>
+
+</div>
+
+<!-- JS -->
+<script>
+function toggleMenu() {
+  document.getElementById("sideMenu").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
