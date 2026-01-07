@@ -147,11 +147,11 @@ body > * {
 /* Hamburger button (3 lines) */
 .menu-btn{
   position: fixed;
-  top: 18px;
+  top: 125px;
   left: 37%;
   z-index: 9999;           /* πάνω από όλα */
-  width: 42px;
-  height: 42px;
+  width: 22px;
+  height: 22px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -178,21 +178,21 @@ body > * {
 .side-menu{
   position: fixed;
   top: 0;
-  left: -280px;            /* hidden */
-  width: 280px;
+  left: 0;
+  width: 180px;
   height: 100%;
+  display: none;          /* ⬅️ κρυφό */
   z-index: 9998;
   padding: 90px 18px 18px;
   background: rgba(255,255,255,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: left 0.28s ease;
   box-shadow: 8px 0 20px rgba(0,0,0,0.18);
 }
 
-/* open state */
+
 .side-menu.active{
-  left: 0;
+  display: block;         /* ⬅️ εμφανίζεται */
 }
 
 /* menu links */
