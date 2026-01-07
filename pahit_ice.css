@@ -23,7 +23,7 @@ body{
   body{ background-size: contain; }
 }
 
-/* transparent layer ON TOP of the photo */
+/* transparent layer */
 body::before{
   content: "";
   position: fixed;
@@ -32,7 +32,7 @@ body::before{
   z-index: 0;
 }
 
-/* keep all content visible */
+/* keep content above overlay */
 body > *{
   position: relative;
   z-index: 1;
@@ -60,6 +60,7 @@ body > *{
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(6px);
 }
+
 
 .menu-btn span{
   display: block;
@@ -130,10 +131,9 @@ body > *{
   font-size: 26px;
 }
 
-/* images inside menu */
 .menu-icon{
-  width: 28px;
-  height: 28px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.35));
@@ -144,31 +144,15 @@ body > *{
 .side-menu .fa-facebook-f{ color: #2765b6; }
 
 /* =========================
-   SLOGANS (Lick it / Love it / Live it)
+   SLOGANS ROW POSITION
    ========================= */
-.slogan-row{
-  position: fixed;
-  top: 230px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(92vw, 520px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 30;
-  pointer-events: none;
-}
 
+
+/* show timing (JS adds .show) */
 .slogan{
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  white-space: nowrap;
-  font-size: 20px;
-  font-weight: 600;
-  color: #444;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
 .slogan.show{
@@ -178,5 +162,114 @@ body > *{
 
 @media (max-width: 768px){
   .slogan-row{ top: 245px; width: min(92vw, 360px); }
-  .slogan{ font-size: 14px; }
+}
+
+/* =========================
+   ICE CREAM CONE MELT TEXT (LIKE YOUR IMAGE)
+   Use class: melt-cone
+   ========================= */
+.melt-cone{
+  /* font (βάλε Baloo 2 από Google Fonts στο <head>) */
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: 70px;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+    position: fixed;
+  top: 230px;
+  left: 26%;
+  z-index: 30;
+  pointer-events: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.1px;  /* χώρο για τα “στάγματα” */
+
+  /* “μισό παγωτό / μισό κώνος” + waffle pattern */
+  background-image:
+    linear-gradient(to bottom,
+      #75eade 0%,
+      #46d7cf 38%,
+      #f7c982 38%,
+      #e6ab57 100%
+    ),
+    repeating-linear-gradient(135deg,
+      rgba(130, 76, 35, 0.22) 0px,
+      rgba(130, 76, 35, 0.22) 6px,
+      rgba(255, 255, 255, 0.00) 6px,
+      rgba(255, 255, 255, 0.00) 14px
+    );
+
+  background-size: 100% 100%, 100% 62%;
+  background-position: 0 0, 0 52%;
+  background-repeat: no-repeat;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* outline + shadow όπως cartoon */
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.35))
+          drop-shadow(0 5px 10px rgba(0,0,0,0.20));
+}
+
+/* mint drips (3 “curved” drops) */
+/* mint melting drips – 3 different curves */
+.melt-cone::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 6px;                 /* start small */
+  pointer-events: none;
+
+  transform-origin: top;       /* grows DOWN only */
+  opacity: 0;
+
+  background:
+    radial-gradient(ellipse 10px 14px at 18% 0, #46d7cf 0 100%, transparent 101%),
+    radial-gradient(ellipse 14px 22px at 50% 0, #46d7cf 0 100%, transparent 101%),
+    radial-gradient(ellipse 11px 18px at 82% 0, #46d7cf 0 100%, transparent 101%);
+
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.25));
+
+  /* ✅ ONE TIME ONLY + stays at end */
+  animation: meltOnce 4.5s ease-out forwards;
+}
+
+
+
+@keyframes meltOnce{
+  0%{
+    opacity: 0;
+    height: 4px;
+    transform: scaleY(0.7);
+  }
+
+  10%{
+    opacity: 1;
+  }
+
+  40%{
+    height: 14px;
+    transform: scaleY(1.0);
+  }
+
+  70%{
+    height: 24px;             /* more melt */
+    transform: scaleY(1.15);
+  }
+
+  100%{
+    height: 34px;             /* final melt */
+    transform: scaleY(1.25);
+    opacity: 1;
+  }
+}
+
+
+
+@media (max-width: 768px){
+  .melt-cone{ font-size: 16px; }
 }
