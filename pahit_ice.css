@@ -244,3 +244,7 @@ body > * {
   color: #2765b6;
 }
 
+/* hide hamburger when menu is open */
+.menu-btn.hide {
+  display: none;
+}
