@@ -12,7 +12,7 @@
     body {
       min-height: 100svh;              
       background: url("./background2.jpg") no-repeat center center;
-       background-size: cover;   /* FIX για Samsung */
+       background-size: contain;   /* FIX για Samsung */
       background-color: #c8bdc8;
 
 
@@ -232,4 +232,14 @@ body > * {
 /* optional: keep bottom-bar visible above menu */
 .bottom-bar{
   z-index: 9997;
+}
+
+/* Instagram color */
+.side-menu .fa-instagram{
+  color: #dd1d40;
+}
+
+/* Facebook color */
+.side-menu .fa-facebook-f{
+  color: #2765b6;
 }
