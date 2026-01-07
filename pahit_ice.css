@@ -1,112 +1,46 @@
- * {
-      margin: 0;
-      padding: 0;
-    }
- * {
-      margin: 0;
-      padding: 0;
-    }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
+html, body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
-    body {
-      min-height: 100svh;              
-      background: url("./background2.jpg") no-repeat center center;
-       background-size: cover;   /* FIX για Samsung */
-      background-color: #c8bdc8;
+/* BACKGROUND */
+body{
+  min-height: 100svh;
+  background: url("./background2.jpg") no-repeat center center;
+  background-size: cover;         /* ✅ γεμίζει σωστά στο κινητό */
+  background-color: #c8bdc8;
+}
 
-
-
-    }
+/* desktop: να φαίνεται ολόκληρη η φωτο */
+@media (min-width: 769px){
+  body{ background-size: contain; }
+}
 
 /* transparent layer ON TOP of the photo */
-body::before {
+body::before{
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.1); /* ← transparency */
+  inset: 0;
+  background: rgba(255, 255, 255, 0.10);
   z-index: 0;
 }
 
 /* keep all content visible */
-body > * {
+body > *{
   position: relative;
   z-index: 1;
 }
 
-  /* bottom icons bar */
-.bottom-bar{
-  position: fixed;
-  left: 50%;
-  bottom: 8px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 5;
-}
-
-.social-bottom{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-/* FontAwesome icons */
-.social-bottom.instagram i{
-  font-size: 60px;
-  color: #dd1d40;
-  filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-}
-
-.social-bottom.facebook i{
-  font-size: 50px;
-  color: #2765b6;
-  filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-}
-
-/* Images */
-.bolt-icon{
-  width: 120px;
-  height: 50px;
-}
-
-.waze-icon{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-}
-
-.pin-icon{
-  width: 70px;
-  height: 60px;
-}
-
-/* Shadow for all images */
-.social-bottom img{
-  display: block;
-  filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-}
+/* =========================
+   BOTTOM ICONS BAR
+   ========================= */
 .bottom-bar{
   position: fixed;
   bottom: 10px;
@@ -117,45 +51,43 @@ body > * {
   justify-content: center;
   gap: 12px;
   max-width: 95vw;
-  z-index: 10;
+  z-index: 20;
 }
 
-/* όλα να έχουν ίδιο "κουτί" */
 .social-bottom{
   width: 60px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
-/* fontawesome */
 .instagram i{ font-size: 48px; color: #dd1d40; }
 .facebook i{ font-size: 42px; color: #2765b6; }
 
-/* εικόνες */
 .bolt-icon{ width: 60px; height: auto; }
-.waze-icon{ width: 45px; }
-.pin-icon{ width: 40px; }
+.waze-icon{ width: 45px; height: auto; border-radius: 50%; }
+.pin-icon{ width: 40px; height: auto; }
 
 .social-bottom i,
 .social-bottom img{
-  filter:
-    drop-shadow(0.5px 0.5px 1px black);
+  filter: drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.65));
+  display: block;
 }
 
 /* =========================
-   LEFT HAMBURGER + SIDE MENU
+   HAMBURGER + SIDE MENU (ICONS ONLY)
    ========================= */
 
-/* Hamburger button (3 lines) */
+/* hamburger */
 .menu-btn{
   position: fixed;
   top: 110px;
-  left: 37%;
-  z-index: 9999;           /* πάνω από όλα */
-  width: 30px;
-  height: 22px;
+  left: 37%;                 /* ✅ πάντα αριστερά */
+  z-index: 9999;
+  width: 42px;
+  height: 42px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -168,7 +100,6 @@ body > * {
   -webkit-backdrop-filter: blur(6px);
 }
 
-/* the 3 lines */
 .menu-btn span{
   display: block;
   height: 3px;
@@ -178,393 +109,105 @@ body > * {
   box-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.35);
 }
 
-/* Side menu panel */
-.side-menu{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 180px;
-  height: 100%;
-  display: none;          /* ⬅️ κρυφό */
-  z-index: 9998;
-  padding: 90px 18px 18px;
-  background: rgba(255,255,255,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 8px 0 20px rgba(0,0,0,0.18);
-}
-
-
-.side-menu.active{
-  display: block;         /* ⬅️ εμφανίζεται */
-}
-
-/* menu links */
-.side-menu a{
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 14px;
-  margin-bottom: 10px;
-  border-radius: 16px;
-  text-decoration: none;
-  color: #222;
-  font-size: 18px;
-  font-weight: 600;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.06);
-}
-
-.side-menu a:hover{
-  background: rgba(255,255,255,0.85);
-}
-
-/* fontawesome icons inside menu */
-.side-menu i{
-  font-size: 22px;
-}
-
-/* images inside menu (bolt/waze/pin) */
-.menu-icon{
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  display: block;
-  filter: drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.35));
-}
-
-/* optional: keep bottom-bar visible above menu */
-.bottom-bar{
-  z-index: 9997;
-}
-
-/* Instagram color */
-.side-menu .fa-instagram{
-  color: #dd1d40;
-}
-
-/* Facebook color */
-.side-menu .fa-facebook-f{
-  color: #2765b6;
-}
-/* hide hamburger when menu is open */
+/* hide hamburger when menu open */
 .menu-btn.hide{
   display: none;
 }
 
-
-/* slogans hidden initially */
-.slogan{
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-/* visible state */
-.slogan.show{
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* slogans row UNDER AYIA FILA */
-.slogan-row{
-  position: fixed;
-  top: 230px;              /* ⬅️ ΚΑΤΩ από AYIA FILA */
-  left: 45%;
-  transform: translateX(-50%);
-  width: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-  pointer-events: none;
-}
-@media (max-width: 768px){
-  .slogan-row{
-    top: 260px;   /* λίγο πιο πάνω στο κινητό */
-  }
-
-  .slogan{
-    font-size: 16px;
-  }
-}
-
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    body {
-      min-height: 100svh;              
-      background: url("./background2.jpg") no-repeat center center;
-       background-size: cover;   /* FIX για Samsung */
-      background-color: #c8bdc8;
-
-
-
-    }
-
-/* transparent layer ON TOP of the photo */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.1); /* ← transparency */
-  z-index: 0;
-}
-
-/* keep all content visible */
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-  /* bottom icons bar */
-.bottom-bar{
-  position: fixed;
-  left: 50%;
-  bottom: 8px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 5;
-}
-
-.social-bottom{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-/* FontAwesome icons */
-.social-bottom.instagram i{
-  font-size: 60px;
-  color: #dd1d40;
-  filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-}
-
-.social-bottom.facebook i{
-  font-size: 50px;
-  color: #2765b6;
-  filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-}
-
-/* Images */
-.bolt-icon{
-  width: 120px;
-  height: 50px;
-}
-
-.waze-icon{
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-}
-
-.pin-icon{
-  width: 70px;
-  height: 60px;
-}
-
-/* Shadow for all images */
-.social-bottom img{
-  display: block;
-  filter:
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black)
-    drop-shadow(0.2px 0.2px 0.2px black);
-}
-.bottom-bar{
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  max-width: 95vw;
-  z-index: 10;
-}
-
-/* όλα να έχουν ίδιο "κουτί" */
-.social-bottom{
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* fontawesome */
-.instagram i{ font-size: 48px; color: #dd1d40; }
-.facebook i{ font-size: 42px; color: #2765b6; }
-
-/* εικόνες */
-.bolt-icon{ width: 60px; height: auto; }
-.waze-icon{ width: 45px; }
-.pin-icon{ width: 40px; }
-
-.social-bottom i,
-.social-bottom img{
-  filter:
-    drop-shadow(0.5px 0.5px 1px black);
-}
-
-/* =========================
-   LEFT HAMBURGER + SIDE MENU
-   ========================= */
-
-/* Hamburger button (3 lines) */
-.menu-btn{
-  position: fixed;
-  top: 110px;
-  left: 37%;
-  z-index: 9999;           /* πάνω από όλα */
-  width: 30px;
-  height: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 7px;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-/* the 3 lines */
-.menu-btn span{
-  display: block;
-  height: 3px;
-  width: 100%;
-  background: #2b2b2b;
-  border-radius: 999px;
-  box-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.35);
-}
-
-/* Side menu panel */
+/* side menu panel */
 .side-menu{
   position: fixed;
   top: 0;
   left: 0;
-  width: 180px;
+  width: 92px;                /* ✅ σωστό πλάτος */
   height: 100%;
-  display: none;          /* ⬅️ κρυφό */
+  display: none;              /* hidden */
   z-index: 9998;
-  padding: 90px 18px 18px;
+  padding: 90px 10px 10px;
   background: rgba(255,255,255,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 8px 0 20px rgba(0,0,0,0.18);
 }
 
-
 .side-menu.active{
-  display: block;         /* ⬅️ εμφανίζεται */
+  display: block;
 }
 
-/* menu links */
+/* icon buttons */
 .side-menu a{
+  width: 56px;
+  height: 56px;
+  margin: 12px auto;
+  padding: 0;
+  border-radius: 16px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px 14px;
-  margin-bottom: 10px;
-  border-radius: 16px;
+  justify-content: center;
   text-decoration: none;
-  color: #222;
-  font-size: 18px;
-  font-weight: 600;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .side-menu a:hover{
-  background: rgba(255,255,255,0.85);
+  transform: scale(1.08);
+  background: #fff;
 }
 
-/* fontawesome icons inside menu */
-.side-menu i{
-  font-size: 22px;
-}
+.side-menu i{ font-size: 26px; }
 
-/* images inside menu (bolt/waze/pin) */
 .menu-icon{
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0.5px 0.5px 1px rgba(0,0,0,0.35));
 }
 
-/* optional: keep bottom-bar visible above menu */
-.bottom-bar{
-  z-index: 9997;
+/* colors */
+.side-menu .fa-instagram{ color: #dd1d40; }
+.side-menu .fa-facebook-f{ color: #2765b6; }
+
+/* keep bottom-bar above background */
+.bottom-bar{ z-index: 9997; }
+
+/* =========================
+   SLOGANS (Lick it / Love it / Live it)
+   ========================= */
+
+.slogan-row{
+  position: fixed;
+  top: 230px;                 /* ✅ κάτω από AYIA FILA (ρύθμισε αν χρειαστεί) */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 520px);    /* ✅ σωστό πλάτος */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 30;
+  pointer-events: none;
 }
 
-/* Instagram color */
-.side-menu .fa-instagram{
-  color: #dd1d40;
-}
-
-/* Facebook color */
-.side-menu .fa-facebook-f{
-  color: #2765b6;
-}
-
-
-/* slogans hidden initially */
 .slogan{
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 600;
+  color: #444;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* visible state */
 .slogan.show{
   opacity: 1;
   transform: translateY(0);
 }
 
-/* slogans row UNDER AYIA FILA */
-.slogan-row{
-  position: fixed;
-  top: 230px;              /* ⬅️ ΚΑΤΩ από AYIA FILA */
-  left: 45%;
-  transform: translateX(-50%);
-  width: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-  pointer-events: none;
-}
 @media (max-width: 768px){
-  .slogan-row{
-    top: 260px;   /* λίγο πιο πάνω στο κινητό */
-  }
-
-  .slogan{
-    font-size: 16px;
-  }
+  .menu-btn{ top: 90px; left: 18px; }
+  .slogan-row{ top: 245px; width: min(92vw, 360px); }
+  .slogan{ font-size: 14px; }
 }
-
