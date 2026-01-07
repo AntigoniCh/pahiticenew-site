@@ -55,18 +55,18 @@
 const menuBtn = document.querySelector(".menu-btn");
 const sideMenu = document.getElementById("sideMenu");
 
-/* open / close menu */
+/* open / close when clicking hamburger */
 menuBtn.addEventListener("click", function (e) {
-  e.stopPropagation();               // don't trigger background click
+  e.stopPropagation();               // μην κλείνει αμέσως
   sideMenu.classList.toggle("active");
-  menuBtn.classList.toggle("hide");
+  menuBtn.classList.toggle("hide");  // 👈 ΚΡΥΒΕΙ τις 3 γραμμές
 });
 
 /* close menu when clicking outside */
 document.addEventListener("click", function () {
   if (sideMenu.classList.contains("active")) {
     sideMenu.classList.remove("active");
-    menuBtn.classList.remove("hide");
+    menuBtn.classList.remove("hide"); // 👈 ΕΠΑΝΕΜΦΑΝΙΣΗ
   }
 });
 
@@ -75,6 +75,7 @@ sideMenu.addEventListener("click", function (e) {
   e.stopPropagation();
 });
 </script>
+
 <script>
 window.addEventListener("load", () => {
   setTimeout(() => {
