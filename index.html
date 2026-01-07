@@ -9,6 +9,11 @@
 </head>
 
 <body>
+<div class="slogan-row">
+  <span id="lick" class="slogan">Lick it</span>
+  <span id="love" class="slogan">Love it</span>
+  <span id="live" class="slogan">Live it</span>
+</div>
 
 <!-- Hamburger menu (3 lines on left) -->
 <div class="menu-btn" onclick="toggleMenu()">
@@ -45,7 +50,6 @@
     <span>Location</span>
   </a>
 
-</div>
 
 <script>
 const menuBtn = document.querySelector(".menu-btn");
@@ -69,6 +73,21 @@ document.addEventListener("click", function () {
 /* prevent closing when clicking inside menu */
 sideMenu.addEventListener("click", function (e) {
   e.stopPropagation();
+});
+</script>
+<script>
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.getElementById("lick").classList.add("show");
+  }, 3000);
+
+  setTimeout(() => {
+    document.getElementById("love").classList.add("show");
+  }, 6000);
+
+  setTimeout(() => {
+    document.getElementById("live").classList.add("show");
+  }, 9000);
 });
 </script>
 
