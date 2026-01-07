@@ -27,7 +27,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.2); /* ← transparency */
+  background: rgba(255, 255, 255, 0.1); /* ← transparency */
   z-index: 0;
 }
 
@@ -147,10 +147,10 @@ body > * {
 /* Hamburger button (3 lines) */
 .menu-btn{
   position: fixed;
-  top: 125px;
+  top: 110px;
   left: 37%;
   z-index: 9999;           /* πάνω από όλα */
-  width: 22px;
+  width: 30px;
   height: 22px;
   display: flex;
   flex-direction: column;
@@ -244,9 +244,39 @@ body > * {
   color: #2765b6;
 }
 
-/* hide hamburger when menu is open */
-.menu-btn.hide {
-  display: none;
+
+/* slogans hidden initially */
+.slogan{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+/* visible state */
+.slogan.show{
+  opacity: 1;
+  transform: translateY(0);
+}
 
+/* slogans row UNDER AYIA FILA */
+.slogan-row{
+  position: fixed;
+  top: 230px;              /* ⬅️ ΚΑΤΩ από AYIA FILA */
+  left: 45%;
+  transform: translateX(-50%);
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+@media (max-width: 768px){
+  .slogan-row{
+    top: 260px;   /* λίγο πιο πάνω στο κινητό */
+  }
+
+  .slogan{
+    font-size: 16px;
+  }
+}
