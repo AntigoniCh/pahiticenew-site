@@ -12,7 +12,7 @@
     body {
       min-height: 100svh;              
       background: url("./background2.jpg") no-repeat center center;
-       background-size: contain;   /* FIX για Samsung */
+       background-size: cover;   /* FIX για Samsung */
       background-color: #c8bdc8;
 
 
@@ -248,4 +248,5 @@ body > * {
 .menu-btn.hide {
   display: none;
 }
+
 
