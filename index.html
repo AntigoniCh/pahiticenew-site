@@ -47,12 +47,31 @@
 
 </div>
 
-<!-- JS -->
 <script>
-function toggleMenu() {
-  document.getElementById("sideMenu").classList.toggle("active");
-}
+const menuBtn = document.querySelector(".menu-btn");
+const sideMenu = document.getElementById("sideMenu");
+
+/* open / close menu */
+menuBtn.addEventListener("click", function (e) {
+  e.stopPropagation();               // don't trigger background click
+  sideMenu.classList.toggle("active");
+  menuBtn.classList.toggle("hide");
+});
+
+/* close menu when clicking outside */
+document.addEventListener("click", function () {
+  if (sideMenu.classList.contains("active")) {
+    sideMenu.classList.remove("active");
+    menuBtn.classList.remove("hide");
+  }
+});
+
+/* prevent closing when clicking inside menu */
+sideMenu.addEventListener("click", function (e) {
+  e.stopPropagation();
+});
 </script>
+
 
 </body>
 </html>
