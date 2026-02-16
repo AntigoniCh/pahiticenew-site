@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAHITICE – Skip The Line</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#c8bdc8;
+      --bg2:#e6dce6;
+      --ink:#4b3f4b;
+      --card: rgba(255,255,255,0.80);
+      --shadow: 0 10px 18px rgba(90,60,90,0.16);
+      --price:#0a76d5;
+      --btn:#7a5a7a;
+      --btn2:#6a4d6a;
+      --line: rgba(120,90,120,0.18);
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    body{
+      font-family:"Baloo 2", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 50% 0%, var(--bg2), var(--bg));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* ===== Top sticky (title + tabs) ===== */
+    .top{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(230,220,230,0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brandRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 12px 6px;
+      gap: 10px;
+    }
+    .title{
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+
+    .cartBtn{
+      border:none;
+      cursor:pointer;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 6px 14px rgba(90,60,90,0.14);
+      color: var(--ink);
+      font-weight: 900;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .badge{
+      min-width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: var(--btn);
+      color:#fff;
+      font-size: 12px;
+      padding: 0 7px;
+    }
+
+    .tabs{
+      display:flex;
+      gap: 10px;
+      padding: 8px 10px 10px;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+    .tabs::-webkit-scrollbar{ display:none; }
+
+    .tab{
+      white-space:nowrap;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.55);
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .tab:hover{ transform: translateY(-1px); }
+    .tab.active{
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(120,90,120,0.35);
+      box-shadow: 0 8px 16px rgba(90,60,90,0.14);
+    }
+
+    /* ===== Content ===== */
+    .container{
+      width: min(980px, 94vw);
+      margin: 14px auto 110px;
+    }
+    .section{
+      scroll-margin-top: 120px;
+      margin-top: 14px;
+      padding-top: 8px;
+    }
+    .sectionTitle{
+      font-size: 18px;
+      font-weight: 900;
+      margin: 8px 2px 10px;
+    }
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+
+    .card{
+      display:grid;
+      grid-template-columns: 1fr 86px;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(120,90,120,0.12);
+    }
+    .name{
+      font-weight: 900;
+      font-size: 15px;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .desc{
+      opacity:.85;
+      font-size: 13px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .price{
+      font-weight: 900;
+      color: var(--price);
+      font-size: 15px;
+    }
+
+    .addBtn{
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--line);
+      font-weight: 900;
+      color: var(--btn2);
+      white-space:nowrap;
+      transition: transform .12s ease;
+    }
+    .addBtn:active{ transform: translateY(1px); }
+
+    .plus{
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--btn);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .thumb{
+      width: 86px;
+      height: 86px;
+      border-radius: 16px;
+      overflow:hidden;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(120,90,120,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .thumb .placeholder{
+      font-weight:900;
+      opacity:.55;
+      font-size:12px;
+    }
+
+    /* ===== Cart Drawer ===== */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(30,20,30,0.35);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .2s ease;
+      z-index: 90;
+    }
+    .overlay.show{ opacity:1; pointer-events:auto; }
+
+    .drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(420px, 92vw);
+      height: 100%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: -14px 0 30px rgba(0,0,0,0.18);
+      transform: translateX(105%);
+      transition: transform .25s ease;
+      z-index: 100;
+      display:flex;
+      flex-direction:column;
+    }
+    .drawer.open{ transform: translateX(0); }
+
+    .drawerHeader{
+      padding: 14px 14px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom: 1px solid var(--line);
+    }
+    .drawerHeader .h{
+      font-weight: 900;
+      font-size: 18px;
+    }
+    .closeBtn{
+      border:none;
+      background: rgba(200,189,200,0.6);
+      color: var(--ink);
+      font-weight: 900;
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor:pointer;
+    }
+
+    .cartList{
+      padding: 12px 14px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      overflow:auto;
+      flex:1;
+    }
+
+    .cartItem{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(120,90,120,0.14);
+      background: rgba(230,220,230,0.35);
+    }
+    .cartItem .cn{ font-weight:900; }
+    .cartItem .cp{ color:var(--price); font-weight:900; }
+    .cartItem .flv{ opacity:.85; font-weight:800; font-size:13px; margin-top:2px; }
+
+    .qty{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .qBtn{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.85);
+      cursor:pointer;
+      font-weight: 900;
+      color: var(--ink);
+    }
+    .qNum{ min-width: 22px; text-align:center; font-weight:900; }
+
+    .drawerFooter{
+      border-top: 1px solid var(--line);
+      padding: 12px 14px 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .totalRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    .checkout{
+      border:none;
+      cursor:pointer;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #7a5a7a, #6a4d6a);
+      color:#fff;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 0 10px 18px rgba(90,60,90,0.22);
+    }
+    .clear{
+      border:none;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(200,189,200,0.55);
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    /* ===== Flavors Modal ===== */
+    .flv-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(30,20,30,0.35);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .2s ease;
+      z-index: 120;
+    }
+    .flv-overlay.show{ opacity:1; pointer-events:auto; }
+
+    .flv-modal{
+      position: fixed;
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%) scale(0.98);
+      width: min(520px, 92vw);
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 130;
+    }
+    .flv-modal.show{
+      opacity:1;
+      pointer-events:auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .flv-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .flv-title{ font-weight: 900; font-size: 18px; }
+    .flv-close{
+      border:none;
+      cursor:pointer;
+      background: rgba(200,189,200,0.55);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .flv-body{ padding: 12px 14px 14px; }
+    .flv-sub{ opacity:.85; font-weight: 800; margin-bottom: 10px; }
+
+    .flv-flavors{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .flv-chip{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.78);
+      padding: 10px 12px;
+      border-radius: 16px;
+      cursor:pointer;
+      font-weight: 900;
+      user-select:none;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .flv-chip:hover{ transform: translateY(-1px); }
+    .flv-chip.selected{
+      background: rgba(230,220,230,0.92);
+      border-color: rgba(120,90,120,0.35);
+      box-shadow: 0 8px 16px rgba(90,60,90,0.14);
+    }
+
+    .flv-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .flv-qty{ display:flex; align-items:center; gap: 8px; }
+    .flv-add{
+      flex:1;
+      border:none;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #7a5a7a, #6a4d6a);
+      color:#fff;
+      font-weight: 900;
+      font-size: 15px;
+      box-shadow: 0 10px 18px rgba(90,60,90,0.18);
+    }
+    .flv-add:disabled{ opacity:.5; cursor:not-allowed; }
+    .flv-hint{ margin-top:10px; font-weight:800; opacity:.85; }
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    <div class="brandRow">
+      <div class="title">PAHITICE – Skip The Line</div>
+      <button class="cartBtn" id="openCartBtn" type="button">
+        Καλάθι <span class="badge" id="cartCount">0</span>
+      </button>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-target="sec-pagota">ΠΑΓΩΤΑ</div>
+      <div class="tab" data-target="sec-fruity">FRUITY YOGURT</div>
+      <div class="tab" data-target="sec-xonakia">ΧΩΝΑΚΙΑ ΠΑΓΩΤΟΥ</div>
+      <div class="tab" data-target="sec-anapsyktika">ΑΝΑΨΥΧΤΙΚΑ</div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="section" id="sec-pagota">
+      <div class="sectionTitle">ΠΑΓΩΤΑ</div>
+      <div class="list" id="list-pagota"></div>
+    </section>
+
+    <section class="section" id="sec-fruity">
+      <div class="sectionTitle">FRUITY YOGURT</div>
+      <div class="list" id="list-fruity"></div>
+    </section>
+
+    <section class="section" id="sec-xonakia">
+      <div class="sectionTitle">ΧΩΝΑΚΙΑ ΠΑΓΩΤΟΥ</div>
+      <div class="list" id="list-xonakia"></div>
+    </section>
+
+    <section class="section" id="sec-anapsyktika">
+      <div class="sectionTitle">ΑΝΑΨΥΧΤΙΚΑ</div>
+      <div class="list" id="list-anapsyktika"></div>
+    </section>
+  </main>
+
+  <!-- Cart drawer -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawerHeader">
+      <div class="h">Η παραγγελία μου</div>
+      <button class="closeBtn" id="closeCartBtn" type="button">Κλείσιμο</button>
+    </div>
+
+    <div class="cartList" id="cartList"></div>
+
+    <div class="drawerFooter">
+      <div class="totalRow">
+        <span>Σύνολο</span>
+        <span id="cartTotal">€0,00</span>
+      </div>
+      <button class="checkout" type="button" id="checkoutBtn">Συνέχεια / Checkout</button>
+      <button class="clear" type="button" id="clearBtn">Καθαρισμός καλαθιού</button>
+    </div>
+  </aside>
+
+  <!-- Flavors modal -->
+  <div class="flv-overlay" id="flvOverlay"></div>
+  <div class="flv-modal" id="flvModal" role="dialog" aria-modal="true">
+    <div class="flv-head">
+      <div class="flv-title" id="flvTitle">Επιλογή</div>
+      <button class="flv-close" id="flvClose" type="button">✕</button>
+    </div>
+
+    <div class="flv-body">
+      <div class="flv-sub" id="flvSub"></div>
+      <div class="flv-flavors" id="flvFlavors"></div>
+
+      <div class="flv-row">
+        <div class="flv-qty">
+          <button class="qBtn" id="flvMinus" type="button">-</button>
+          <div class="qNum" id="flvQty">1</div>
+          <button class="qBtn" id="flvPlus" type="button">+</button>
+        </div>
+
+        <button class="flv-add" id="flvAdd" type="button">Προσθήκη στο καλάθι</button>
+      </div>
+
+      <div class="flv-hint" id="flvHint"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ===== 1) PRODUCTS (EDIT HERE) ===== */
+    const FLAVORS = ["Βανίλια","Σοκολάτα","Φράουλα","Μαστίχα","Cookies","Φιστίκι","Μπανάνα","Καραμέλα"];
+
+    const PRODUCTS = {
+      pagota: [
+        { id:"p1", name:"Παγωτό Thermo Pack 3 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:6.00, image:"", scoops:3, flavors:FLAVORS },
+        { id:"p2", name:"Παγωτό Thermo Pack 4 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:7.00, image:"", scoops:4, flavors:FLAVORS },
+        { id:"p3", name:"Παγωτό Στέβια 3 Μπάλες", desc:"Γιαούρτι, σοκολάτα, φράουλα, ροδάκινο", price:7.00, image:"", scoops:3, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"p4", name:"Παγωτό Thermo Box 8 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:13.50, image:"", scoops:8, flavors:FLAVORS },
+      ],
+      fruity: [
+        { id:"f1", name:"Fruity Yogurt Bowl", desc:"Γιαούρτι + φρούτα + toppings", price:5.50, image:"" },
+        { id:"f2", name:"Fruity Yogurt Mini", desc:"Μικρό μέγεθος", price:4.00, image:"" },
+      ],
+      xonakia: [
+        { id:"x1", name:"Χωνάκι 1 Μπάλα", desc:"Διάλεξε γεύση", price:2.50, image:"", scoops:1, flavors:FLAVORS },
+        { id:"x2", name:"Χωνάκι 2 Μπάλες", desc:"Διάλεξε γεύσεις", price:4.00, image:"", scoops:2, flavors:FLAVORS },
+      ],
+      anapsyktika: [
+        { id:"a1", name:"Coca-Cola 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"" },
+        { id:"a2", name:"Sprite 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"" },
+        { id:"a3", name:"Νερό 500ml", desc:"", price:1.00, image:"" },
+      ]
+    };
+
+    /* ===== 2) HELPERS ===== */
+    function euro(n){ return "€" + n.toFixed(2).replace(".", ","); }
+    function allItems(){ return [...PRODUCTS.pagota, ...PRODUCTS.fruity, ...PRODUCTS.xonakia, ...PRODUCTS.anapsyktika]; }
+    function baseId(key){ return key.split("|")[0]; }
+    function flavorText(key){ const p = key.split("|"); return p[1] ? p[1].trim() : ""; }
+    function findItem(key){ return allItems().find(x => x.id === baseId(key)); }
+    function makeKey(item, flavors){
+      if(!flavors || flavors.length === 0) return item.id;
+      return item.id + "|" + flavors.join(" / ");
+    }
+
+    /* ===== 3) RENDER CARDS ===== */
+    function cardHTML(item){
+      const img = item.image
+        ? `<img src="${item.image}" alt="${item.name}">`
+        : `<div class="placeholder">IMG</div>`;
+
+      return `
+        <div class="card">
+          <div>
+            <div class="name">${item.name}</div>
+            <div class="desc">${item.desc || ""}</div>
+            <div class="row">
+              <div class="price">${euro(item.price)}</div>
+              <button class="addBtn" data-open="${item.id}" type="button">
+                <span class="plus">+</span> Επιλογή
+              </button>
+            </div>
+          </div>
+          <div class="thumb">${img}</div>
+        </div>
+      `;
+    }
+
+    function render(){
+      document.getElementById("list-pagota").innerHTML = PRODUCTS.pagota.map(cardHTML).join("");
+      document.getElementById("list-fruity").innerHTML = PRODUCTS.fruity.map(cardHTML).join("");
+      document.getElementById("list-xonakia").innerHTML = PRODUCTS.xonakia.map(cardHTML).join("");
+      document.getElementById("list-anapsyktika").innerHTML = PRODUCTS.anapsyktika.map(cardHTML).join("");
+    }
+
+    /* ===== 4) CART (localStorage) ===== */
+    const CART_KEY = "pahitice_cart_v2";
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || "{}"); // { key: qty }
+
+    function saveCart(){
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      updateCartUI();
+    }
+
+    function cartCount(){
+      return Object.values(cart).reduce((a,b)=>a+b,0);
+    }
+
+    function cartTotal(){
+      let total = 0;
+      for(const [key,qty] of Object.entries(cart)){
+        const it = findItem(key);
+        if(it) total += it.price * qty;
+      }
+      return total;
+    }
+
+    function inc(key){
+      cart[key] = (cart[key] || 0) + 1;
+      saveCart();
+    }
+
+    function dec(key){
+      if(!cart[key]) return;
+      cart[key] -= 1;
+      if(cart[key] <= 0) delete cart[key];
+      saveCart();
+    }
+
+    function clearCart(){
+      cart = {};
+      saveCart();
+    }
+
+    function updateCartUI(){
+      document.getElementById("cartCount").textContent = cartCount();
+      document.getElementById("cartTotal").textContent = euro(cartTotal());
+
+      const list = document.getElementById("cartList");
+      const entries = Object.entries(cart);
+
+      if(entries.length === 0){
+        list.innerHTML = `<div style="opacity:.75;font-weight:900;padding:8px;">Το καλάθι είναι άδειο.</div>`;
+        return;
+      }
+
+      list.innerHTML = entries.map(([key,qty])=>{
+        const it = findItem(key);
+        if(!it) return "";
+        const flv = flavorText(key);
+        return `
+          <div class="cartItem">
+            <div>
+              <div class="cn">${it.name}</div>
+              ${flv ? `<div class="flv">Γεύσεις: ${flv}</div>` : ``}
+              <div class="cp">${euro(it.price)}</div>
+            </div>
+            <div class="qty">
+              <button class="qBtn" data-dec="${key}" type="button">-</button>
+              <div class="qNum">${qty}</div>
+              <button class="qBtn" data-inc="${key}" type="button">+</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    /* ===== 5) TABS (click -> scroll) ===== */
+    document.querySelectorAll(".tab").forEach(tab=>{
+      tab.addEventListener("click", ()=>{
+        const id = tab.dataset.target;
+        document.getElementById(id).scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
+
+    const sections = ["sec-pagota","sec-fruity","sec-xonakia","sec-anapsyktika"].map(id=>document.getElementById(id));
+    const tabs = [...document.querySelectorAll(".tab")];
+
+    const obs = new IntersectionObserver((entries)=>{
+      const visible = entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+      if(!visible) return;
+      const active = visible.target.id;
+      tabs.forEach(t=>t.classList.toggle("active", t.dataset.target === active));
+    }, { threshold:[0.35,0.55,0.7] });
+
+    sections.forEach(s=>obs.observe(s));
+
+    /* ===== 6) CART drawer open/close ===== */
+    const overlay = document.getElementById("overlay");
+    const drawer  = document.getElementById("drawer");
+
+    function openCart(){
+      overlay.classList.add("show");
+      drawer.classList.add("open");
+      updateCartUI();
+    }
+    function closeCart(){
+      overlay.classList.remove("show");
+      drawer.classList.remove("open");
+    }
+
+    document.getElementById("openCartBtn").addEventListener("click", openCart);
+    document.getElementById("closeCartBtn").addEventListener("click", closeCart);
+    overlay.addEventListener("click", closeCart);
+    document.getElementById("clearBtn").addEventListener("click", clearCart);
+    document.getElementById("checkoutBtn").addEventListener("click", ()=>alert("Εδώ μετά βάζουμε checkout/στοιχεία πελάτη."));
+
+    /* ===== 7) FLAVORS MODAL ===== */
+    const flvOverlay = document.getElementById("flvOverlay");
+    const flvModal   = document.getElementById("flvModal");
+    const flvTitle   = document.getElementById("flvTitle");
+    const flvSub     = document.getElementById("flvSub");
+    const flvFlavors = document.getElementById("flvFlavors");
+    const flvHint    = document.getElementById("flvHint");
+    const flvQtyEl   = document.getElementById("flvQty");
+    const flvMinus   = document.getElementById("flvMinus");
+    const flvPlus    = document.getElementById("flvPlus");
+    const flvAdd     = document.getElementById("flvAdd");
+    const flvClose   = document.getElementById("flvClose");
+
+    let currentItem = null;
+    let selected = [];
+    let qty = 1;
+
+    function openFlavorModal(item){
+      currentItem = item;
+      selected = [];
+      qty = 1;
+      flvQtyEl.textContent = qty;
+      flvTitle.textContent = item.name;
+
+      const hasFlavors = item.scoops && item.flavors && item.flavors.length;
+      flvSub.textContent = hasFlavors ? `Διάλεξε ${item.scoops} γεύσεις` : `Πόσα θέλεις να προσθέσεις;`;
+
+      flvHint.textContent = "";
+      flvFlavors.innerHTML = "";
+
+      if(hasFlavors){
+        item.flavors.forEach(fl=>{
+          const chip = document.createElement("div");
+          chip.className = "flv-chip";
+          chip.textContent = fl;
+
+          chip.addEventListener("click", ()=>{
+            const i = selected.indexOf(fl);
+            if(i >= 0){
+              selected.splice(i,1);
+              chip.classList.remove("selected");
+            }else{
+              if(selected.length >= item.scoops){
+                flvHint.textContent = `Μέχρι ${item.scoops} γεύσεις.`;
+                return;
+              }
+              selected.push(fl);
+              chip.classList.add("selected");
+            }
+            validateModal();
+          });
+
+          flvFlavors.appendChild(chip);
+        });
+      }
+
+      validateModal();
+      flvOverlay.classList.add("show");
+      flvModal.classList.add("show");
+    }
+
+    function closeFlavorModal(){
+      flvOverlay.classList.remove("show");
+      flvModal.classList.remove("show");
+    }
+
+    function validateModal(){
+      const hasFlavors = currentItem && currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+      if(hasFlavors){
+        const ok = selected.length === currentItem.scoops;
+        flvAdd.disabled = !ok;
+        flvHint.textContent = ok ? "" : `Έχεις επιλέξει ${selected.length}/${currentItem.scoops} γεύσεις.`;
+      }else{
+        flvAdd.disabled = false;
+        flvHint.textContent = "";
+      }
+    }
+
+    flvMinus.addEventListener("click", ()=>{ qty = Math.max(1, qty-1); flvQtyEl.textContent = qty; });
+    flvPlus.addEventListener("click", ()=>{ qty = qty+1; flvQtyEl.textContent = qty; });
+    flvClose.addEventListener("click", closeFlavorModal);
+    flvOverlay.addEventListener("click", closeFlavorModal);
+
+    flvAdd.addEventListener("click", ()=>{
+      if(!currentItem) return;
+
+      const hasFlavors = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+      const flv = hasFlavors ? selected.slice() : [];
+      const key = makeKey(currentItem, flv);
+
+      cart[key] = (cart[key] || 0) + qty;
+      saveCart();
+      closeFlavorModal();
+    });
+
+    /* ===== 8) CLICK HANDLERS (Event delegation) ===== */
+    document.addEventListener("click", (e)=>{
+      const openId = e.target.closest("[data-open]")?.dataset.open;
+      if(openId){
+        const item = allItems().find(x=>x.id === openId);
+        if(item) openFlavorModal(item);
+      }
+
+      const incKey = e.target.closest("[data-inc]")?.dataset.inc;
+      if(incKey) inc(incKey);
+
+      const decKey = e.target.closest("[data-dec]")?.dataset.dec;
+      if(decKey) dec(decKey);
+    });
+
+    /* INIT */
+    render();
+    updateCartUI();
+  </script>
+</body>
+</html>
