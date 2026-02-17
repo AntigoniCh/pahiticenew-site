@@ -40,6 +40,40 @@
     }
 
     .brandRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;   /* 👈 επιτρέπει στο Check Points να πέσει κάτω */
+}
+
+/* Skip The Line */
+.title{
+  white-space: nowrap;
+}
+
+/* Καλάθι πάντα δεξιά */
+.cartBtn{
+  margin-left:auto;
+}
+
+/* Check Points κάτω από το title */
+.check-points-btn{
+  order:3;                 /* μένει κάτω */
+  align-self:flex-start;   /* 👈 πάει αριστερά */
+  width:auto;              /* 👈 όχι full width */
+
+  padding:1px 5px;        /* 👈 πιο μικρό */
+  font-size:1px;          /* 👈 μικρό text */
+
+  margin-top:1px;
+
+  border-radius:999px;
+  background:rgba(255,255,255,0.6);
+  border:1px solid rgba(120,90,120,0.35);
+}
+
+
+    .brandRow{
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -50,6 +84,7 @@
       font-weight: 800;
       font-size: 16px;
       letter-spacing:.2px;
+       white-space: nowrap; 
     }
 
     .cartBtn{
@@ -438,13 +473,102 @@
     }
     .flv-add:disabled{ opacity:.5; cursor:not-allowed; }
     .flv-hint{ margin-top:10px; font-weight:800; opacity:.85; }
+    .check-points-btn{
+        
+  margin-top: 10px;
+
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 2px solid rgba(120,90,120,0.35);
+
+  background: linear-gradient(180deg,#e6dce6,#c8bdc8);
+  color: #4b3f4b;
+
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(90,60,90,0.18);
+
+  transition: all .15s ease;
+  
+}
+
+.check-points-btn:hover{
+  transform: translateY(-2px);
+}
+.points-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:none;
+  z-index:1000;
+}
+
+.points-modal{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#c8bdc8;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  display:none;
+  z-index:1001;
+  text-align:center;
+}
+
+.points-input{
+  margin-top:10px;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  width:220px;
+  font-family:"Baloo 2";
+}
+
+.points-check-btn{
+  margin-top:10px;
+  padding:10px 20px;
+  border-radius:999px;
+  border:none;
+  background:#7a5a7a;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.points-result{
+  margin-top:10px;
+  font-weight:800;
+}
+
+.points-close{
+  position:absolute;
+  top:8px;
+  right:10px;
+
+  background:transparent;
+  border:none;
+  font-size:22px;
+  font-weight:900;
+  color:#4b3f4b;
+  cursor:pointer;
+}
+
   </style>
 </head>
 
 <body>
   <div class="top">
     <div class="brandRow">
-      <div class="title">PAHITICE – Skip The Line</div>
+      <div class="title">–> Skip The Line</div>
+      <button class="check-points-btn" onclick="openCheckPoints()">
+  Check Points
+</button>
+
       <button class="cartBtn" id="openCartBtn" type="button">
         Καλάθι <span class="badge" id="cartCount">0</span>
       </button>
@@ -525,6 +649,49 @@
       <div class="flv-hint" id="flvHint"></div>
     </div>
   </div>
+<script>
+function openCheckPoints(){
+  document.getElementById("pointsOverlay").style.display="block";
+  document.getElementById("pointsModal").style.display="block";
+  // allow only numbers in phone input
+document.getElementById("pointsPhone").addEventListener("input", function(){
+  this.value = this.value.replace(/\D/g,'');
+});
+
+
+  // καθαρίζει παλιά αποτελέσματα
+  document.getElementById("pointsResult").innerHTML="";
+}
+
+function checkPoints(){
+    
+  const phone = document.getElementById("pointsPhone").value;
+
+  if(!phone){
+    alert("Write your phone number");
+    return;
+  }
+
+  // DEMO (μετά θα τραβάει από Django)
+  // προσωρινά demo χωρίς backend
+let points = localStorage.getItem("demo_points") || 0;
+
+document.getElementById("pointsResult").innerHTML =
+  "Your points: " + points + " 🍦";
+
+}
+// close when clicking outside
+document.getElementById("pointsOverlay").addEventListener("click", closePointsModal);
+
+function closePointsModal(){
+  document.getElementById("pointsOverlay").style.display="none";
+  document.getElementById("pointsModal").style.display="none";
+}
+
+
+
+</script>
+
 
   <script>
     /* ===== 1) PRODUCTS (EDIT HERE) ===== */
@@ -819,5 +986,42 @@
     render();
     updateCartUI();
   </script>
+  <!-- CHECK POINTS MODAL -->
+<div class="points-overlay" id="pointsOverlay"></div>
+
+<div class="points-modal" id="pointsModal">
+
+  <button class="points-close" onclick="closePointsModal()">✕</button>
+
+  <h3>Check Points</h3>
+
+  <input type="tel"
+         id="pointsPhone"
+         class="points-input"
+         placeholder="Enter your phone number"
+         inputmode="numeric"
+         maxlength="8" />
+
+  <button class="points-check-btn" onclick="checkPoints()">
+    Check
+  </button>
+
+  <div id="pointsResult" class="points-result"></div>
+</div>
+
+  <h3>Check Points</h3>
+
+  <input type="tel"
+         id="pointsPhone"
+         class="points-input"
+         placeholder="Enter your phone number" />
+
+  <button class="points-check-btn" onclick="checkPoints()">
+    Check
+  </button>
+
+  <div id="pointsResult" class="points-result"></div>
+</div>
+
 </body>
 </html>
