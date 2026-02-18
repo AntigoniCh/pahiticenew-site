@@ -13,7 +13,7 @@ html, body{
 /* BACKGROUND */
 body{
   min-height: 100svh;
-  background: url("./background3.png") no-repeat center center;
+  background: url("./background4.png") no-repeat center center;
   background-size: cover;
   background-color: #c8bdc8;
 }
@@ -108,7 +108,7 @@ body > *{
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 36%;
+  top: 70%;
   left: 50%;
     padding: 8px 16px;
   transform: translateX(-50%);
@@ -118,13 +118,13 @@ body > *{
   font-family: "Baloo 2", sans-serif;
   font-weight: 800;
   font-size: 18px;
-  color: #4b3f4b;   /* soft purple text */
+  color: #4b493f;   /* soft purple text */
 
   /* 💜 BACKGROUND SAME FAMILY AS YOUR BG */
      background: linear-gradient(
     180deg,
-    #e6dce6 0%,
-    #b8b3b1 100%
+    #c9b07b 0%,
+    #d8dda1 100%
     
   );
 
