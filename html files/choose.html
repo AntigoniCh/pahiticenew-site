@@ -40,53 +40,52 @@
     }
 
     .brandRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;   /* 👈 επιτρέπει στο Check Points να πέσει κάτω */
-}
-
-/* Skip The Line */
-.title{
-  white-space: nowrap;
-}
-
-/* Καλάθι πάντα δεξιά */
-.cartBtn{
-  margin-left:auto;
-}
-
-/* Check Points κάτω από το title */
-.check-points-btn{
-  order:3;                 /* μένει κάτω */
-  align-self:flex-start;   /* 👈 πάει αριστερά */
-  width:auto;              /* 👈 όχι full width */
-
-  padding:1px 5px;        /* 👈 πιο μικρό */
-  font-size:1px;          /* 👈 μικρό text */
-
-  margin-top:1px;
-
-  border-radius:999px;
-  background:rgba(255,255,255,0.6);
-  border:1px solid rgba(120,90,120,0.35);
-}
-
-
-    .brandRow{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       padding: 10px 12px 6px;
       gap: 10px;
+      flex-wrap:nowrap;
     }
-    .title{
+
+    /* LEFT: Check Points + Back */
+    .leftHead{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:6px;
+      min-width: 160px;
+    }
+
+    /* Title button (replaces "–> Skip The Line") */
+    .titleBtn{
+      border:none;
+      background:transparent;
+      padding:0;
+      margin:0;
       font-weight: 800;
       font-size: 16px;
       letter-spacing:.2px;
-       white-space: nowrap; 
+      color: var(--ink);
+      cursor:pointer;
+      white-space:nowrap;
     }
 
+    /* Back arrow under Check Points */
+    .backBtn{
+      border:none;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(120,90,120,0.25);
+      color: var(--ink);
+      font-family: "Baloo 2", sans-serif;
+      font-weight: 900;
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* Cart button always right */
     .cartBtn{
       border:none;
       cursor:pointer;
@@ -99,6 +98,7 @@
       display:flex;
       align-items:center;
       gap: 8px;
+      margin-left:auto;
     }
     .badge{
       min-width: 22px;
@@ -473,89 +473,120 @@
     }
     .flv-add:disabled{ opacity:.5; cursor:not-allowed; }
     .flv-hint{ margin-top:10px; font-weight:800; opacity:.85; }
-    .check-points-btn{
-        
-  margin-top: 10px;
 
-  padding: 12px 22px;
-  border-radius: 999px;
-  border: 2px solid rgba(120,90,120,0.35);
+    /* ===== Points Modal ===== */
+    .points-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      display:none;
+      z-index:1000;
+    }
 
-  background: linear-gradient(180deg,#e6dce6,#c8bdc8);
-  color: #4b3f4b;
+    .points-modal{
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      background:#c8bdc8;
+      padding:20px;
+      border-radius:20px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.3);
+      display:none;
+      z-index:1001;
+      text-align:center;
+    }
 
-  font-family: "Baloo 2", sans-serif;
-  font-weight: 800;
-  font-size: 16px;
+    .points-input{
+      margin-top:10px;
+      padding:12px;
+      border-radius:12px;
+      border:none;
+      width:220px;
+      font-family:"Baloo 2";
+    }
 
-  cursor: pointer;
-  box-shadow: 0 8px 16px rgba(90,60,90,0.18);
+    .points-check-btn{
+      margin-top:10px;
+      padding:10px 20px;
+      border-radius:999px;
+      border:none;
+      background:#7a5a7a;
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
 
-  transition: all .15s ease;
-  
+    .points-result{
+      margin-top:10px;
+      font-weight:800;
+    }
+
+    .points-close{
+      position:absolute;
+      top:8px;
+      right:10px;
+      background:transparent;
+      border:none;
+      font-size:22px;
+      font-weight:900;
+      color:#4b3f4b;
+      cursor:pointer;
+    }
+    /* Flavor counters (allow repeats) */
+.flv-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 10px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.75);
 }
 
-.check-points-btn:hover{
-  transform: translateY(-2px);
-}
-.points-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.35);
-  display:none;
-  z-index:1000;
-}
-
-.points-modal{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#c8bdc8;
-  padding:20px;
-  border-radius:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.3);
-  display:none;
-  z-index:1001;
-  text-align:center;
-}
-
-.points-input{
-  margin-top:10px;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  width:220px;
-  font-family:"Baloo 2";
-}
-
-.points-check-btn{
-  margin-top:10px;
-  padding:10px 20px;
-  border-radius:999px;
-  border:none;
-  background:#7a5a7a;
-  color:white;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.points-result{
-  margin-top:10px;
-  font-weight:800;
-}
-
-.points-close{
-  position:absolute;
-  top:8px;
-  right:10px;
-
-  background:transparent;
-  border:none;
-  font-size:22px;
+.flv-name{
   font-weight:900;
-  color:#4b3f4b;
+}
+
+.flv-ctrl{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.flv-mini{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.9);
   cursor:pointer;
+  font-weight:900;
+  color: var(--ink);
+}
+
+.flv-count{
+  min-width: 20px;
+  text-align:center;
+  font-weight:900;
+}
+/* Fruits chips */
+.fruit-chip{
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.78);
+  padding: 10px 12px;
+  border-radius: 16px;
+  cursor:pointer;
+  font-weight: 900;
+  user-select:none;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.fruit-chip:hover{ transform: translateY(-1px); }
+.fruit-chip.selected{
+  background: rgba(230,220,230,0.92);
+  border-color: rgba(120,90,120,0.35);
+  box-shadow: 0 8px 16px rgba(90,60,90,0.14);
 }
 
   </style>
@@ -564,10 +595,15 @@
 <body>
   <div class="top">
     <div class="brandRow">
-      <div class="title">–> Skip The Line</div>
-      <button class="check-points-btn" onclick="openCheckPoints()">
-  Check Points
-</button>
+      <div class="leftHead">
+        <button class="titleBtn" type="button" onclick="openCheckPoints()">
+          Check Points
+        </button>
+
+        <button class="backBtn" type="button" onclick="goBack()">
+          ← Πίσω
+        </button>
+      </div>
 
       <button class="cartBtn" id="openCartBtn" type="button">
         Καλάθι <span class="badge" id="cartCount">0</span>
@@ -635,6 +671,8 @@
     <div class="flv-body">
       <div class="flv-sub" id="flvSub"></div>
       <div class="flv-flavors" id="flvFlavors"></div>
+<!-- Fruits picker (only for fruity yogurt) -->
+<div class="flv-flavors" id="fruitChoices" style="display:none;"></div>
 
       <div class="flv-row">
         <div class="flv-qty">
@@ -649,53 +687,80 @@
       <div class="flv-hint" id="flvHint"></div>
     </div>
   </div>
-<script>
-function openCheckPoints(){
-  document.getElementById("pointsOverlay").style.display="block";
-  document.getElementById("pointsModal").style.display="block";
-  // allow only numbers in phone input
-document.getElementById("pointsPhone").addEventListener("input", function(){
-  this.value = this.value.replace(/\D/g,'');
-});
 
+  <!-- CHECK POINTS MODAL -->
+  <div class="points-overlay" id="pointsOverlay"></div>
 
-  // καθαρίζει παλιά αποτελέσματα
-  document.getElementById("pointsResult").innerHTML="";
-}
+  <div class="points-modal" id="pointsModal">
+    <button class="points-close" type="button" onclick="closePointsModal()">✕</button>
 
-function checkPoints(){
-    
-  const phone = document.getElementById("pointsPhone").value;
+    <h3>Check Points</h3>
 
-  if(!phone){
-    alert("Write your phone number");
-    return;
-  }
+    <input type="tel"
+           id="pointsPhone"
+           class="points-input"
+           placeholder="Enter your phone number"
+           inputmode="numeric"
+           maxlength="8" />
 
-  // DEMO (μετά θα τραβάει από Django)
-  // προσωρινά demo χωρίς backend
-let points = localStorage.getItem("demo_points") || 0;
+    <button class="points-check-btn" type="button" onclick="checkPoints()">
+      Check
+    </button>
 
-document.getElementById("pointsResult").innerHTML =
-  "Your points: " + points + " 🍦";
+    <div id="pointsResult" class="points-result"></div>
+  </div>
 
-}
-// close when clicking outside
-document.getElementById("pointsOverlay").addEventListener("click", closePointsModal);
+  <script>
+    function goBack(){
+      window.history.back();
+    }
 
-function closePointsModal(){
-  document.getElementById("pointsOverlay").style.display="none";
-  document.getElementById("pointsModal").style.display="none";
-}
+    function openCheckPoints(){
+      document.getElementById("pointsOverlay").style.display="block";
+      document.getElementById("pointsModal").style.display="block";
 
+      // allow only numbers in phone input
+      const phoneInput = document.getElementById("pointsPhone");
+      if(phoneInput && !phoneInput.dataset.bound){
+        phoneInput.addEventListener("input", function(){
+          this.value = this.value.replace(/\D/g,'');
+        });
+        phoneInput.dataset.bound = "1";
+      }
 
+      // clear old result
+      document.getElementById("pointsResult").innerHTML="";
+    }
 
-</script>
+    function checkPoints(){
+      const phone = document.getElementById("pointsPhone").value;
 
+      if(!phone){
+        alert("Write your phone number");
+        return;
+      }
+
+      // DEMO (μετά θα τραβάει από Django)
+      let points = localStorage.getItem("demo_points") || 0;
+
+      document.getElementById("pointsResult").innerHTML =
+        "Your points: " + points + " 🍦";
+    }
+
+    function closePointsModal(){
+      document.getElementById("pointsOverlay").style.display="none";
+      document.getElementById("pointsModal").style.display="none";
+    }
+
+    // close when clicking outside
+    document.getElementById("pointsOverlay").addEventListener("click", closePointsModal);
+  </script>
 
   <script>
     /* ===== 1) PRODUCTS (EDIT HERE) ===== */
     const FLAVORS = ["Βανίλια","Σοκολάτα","Φράουλα","Μαστίχα","Cookies","Φιστίκι","Μπανάνα","Καραμέλα"];
+    const FRUITS = ["Φρούτα δάσους","Φράουλα","Μπανάνα"];
+
 
     const PRODUCTS = {
       pagota: [
@@ -704,10 +769,11 @@ function closePointsModal(){
         { id:"p3", name:"Παγωτό Στέβια 3 Μπάλες", desc:"Γιαούρτι, σοκολάτα, φράουλα, ροδάκινο", price:7.00, image:"", scoops:3, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
         { id:"p4", name:"Παγωτό Thermo Box 8 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:13.50, image:"", scoops:8, flavors:FLAVORS },
       ],
-      fruity: [
-        { id:"f1", name:"Fruity Yogurt Bowl", desc:"Γιαούρτι + φρούτα + toppings", price:5.50, image:"" },
-        { id:"f2", name:"Fruity Yogurt Mini", desc:"Μικρό μέγεθος", price:4.00, image:"" },
-      ],
+    fruity: [
+  { id:"f1", name:"Fruity Yogurt Bowl", desc:"Γιαούρτι + φρούτα + toppings", price:5.50, image:"", fruits:FRUITS },
+  { id:"f2", name:"Fruity Yogurt Mini", desc:"Μικρό μέγεθος", price:4.00, image:"", fruits:FRUITS },
+],
+
       xonakia: [
         { id:"x1", name:"Χωνάκι 1 Μπάλα", desc:"Διάλεξε γεύση", price:2.50, image:"", scoops:1, flavors:FLAVORS },
         { id:"x2", name:"Χωνάκι 2 Μπάλες", desc:"Διάλεξε γεύσεις", price:4.00, image:"", scoops:2, flavors:FLAVORS },
@@ -872,106 +938,211 @@ function closePointsModal(){
     document.getElementById("clearBtn").addEventListener("click", clearCart);
     document.getElementById("checkoutBtn").addEventListener("click", ()=>alert("Εδώ μετά βάζουμε checkout/στοιχεία πελάτη."));
 
-    /* ===== 7) FLAVORS MODAL ===== */
-    const flvOverlay = document.getElementById("flvOverlay");
-    const flvModal   = document.getElementById("flvModal");
-    const flvTitle   = document.getElementById("flvTitle");
-    const flvSub     = document.getElementById("flvSub");
-    const flvFlavors = document.getElementById("flvFlavors");
-    const flvHint    = document.getElementById("flvHint");
-    const flvQtyEl   = document.getElementById("flvQty");
-    const flvMinus   = document.getElementById("flvMinus");
-    const flvPlus    = document.getElementById("flvPlus");
-    const flvAdd     = document.getElementById("flvAdd");
-    const flvClose   = document.getElementById("flvClose");
+   /* ===== 7) FLAVORS MODAL (ALLOW REPEATS) ===== */
+const flvOverlay = document.getElementById("flvOverlay");
+const flvModal   = document.getElementById("flvModal");
+const flvTitle   = document.getElementById("flvTitle");
+const flvSub     = document.getElementById("flvSub");
+const flvFlavors = document.getElementById("flvFlavors");
 
-    let currentItem = null;
-    let selected = [];
-    let qty = 1;
+const fruitChoices = document.getElementById("fruitChoices");
 
-    function openFlavorModal(item){
-      currentItem = item;
-      selected = [];
-      qty = 1;
-      flvQtyEl.textContent = qty;
-      flvTitle.textContent = item.name;
+const flvHint    = document.getElementById("flvHint");
+const flvQtyEl   = document.getElementById("flvQty");
+const flvMinus   = document.getElementById("flvMinus");
+const flvPlus    = document.getElementById("flvPlus");
+const flvAdd     = document.getElementById("flvAdd");
+const flvClose   = document.getElementById("flvClose");
 
-      const hasFlavors = item.scoops && item.flavors && item.flavors.length;
-      flvSub.textContent = hasFlavors ? `Διάλεξε ${item.scoops} γεύσεις` : `Πόσα θέλεις να προσθέσεις;`;
+let currentItem = null;
+let qty = 1;
 
-      flvHint.textContent = "";
-      flvFlavors.innerHTML = "";
+// counts per flavor, e.g. { "Σοκολάτα": 3, "Βανίλια": 0 }
+let flavorCounts = {};
+let selectedFruits = [];
 
-      if(hasFlavors){
-        item.flavors.forEach(fl=>{
-          const chip = document.createElement("div");
-          chip.className = "flv-chip";
-          chip.textContent = fl;
+function totalScoopsSelected(){
+  return Object.values(flavorCounts).reduce((a,b)=>a+b,0);
+}
 
-          chip.addEventListener("click", ()=>{
-            const i = selected.indexOf(fl);
-            if(i >= 0){
-              selected.splice(i,1);
-              chip.classList.remove("selected");
-            }else{
-              if(selected.length >= item.scoops){
-                flvHint.textContent = `Μέχρι ${item.scoops} γεύσεις.`;
-                return;
-              }
-              selected.push(fl);
-              chip.classList.add("selected");
-            }
-            validateModal();
-          });
+function makeFlavorLabelFromCounts(){
+  // returns string like: "Σοκολάτα x3 / Βανίλια x1"
+  const parts = Object.entries(flavorCounts)
+    .filter(([_,c]) => c > 0)
+    .map(([fl,c]) => `${fl} x${c}`);
+  return parts.join(" / ");
+}
 
-          flvFlavors.appendChild(chip);
-        });
-      }
+function openFlavorModal(item){
+  currentItem = item;
+  qty = 1;
+  flvQtyEl.textContent = qty;
+  flvTitle.textContent = item.name;
 
-      validateModal();
-      flvOverlay.classList.add("show");
-      flvModal.classList.add("show");
-    }
+  const hasFlavors = item.scoops && item.flavors && item.flavors.length;
+  flvSub.textContent = hasFlavors
+    ? `Διάλεξε ${item.scoops} scoops (μπορείς και ίδια γεύση πολλές φορές)`
+    : `Πόσα θέλεις να προσθέσεις;`;
 
-    function closeFlavorModal(){
-      flvOverlay.classList.remove("show");
-      flvModal.classList.remove("show");
-    }
+  flvHint.textContent = "";
+  flvFlavors.innerHTML = "";
 
-    function validateModal(){
-      const hasFlavors = currentItem && currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
-      if(hasFlavors){
-        const ok = selected.length === currentItem.scoops;
-        flvAdd.disabled = !ok;
-        flvHint.textContent = ok ? "" : `Έχεις επιλέξει ${selected.length}/${currentItem.scoops} γεύσεις.`;
-      }else{
-        flvAdd.disabled = false;
-        flvHint.textContent = "";
-      }
-    }
+  // reset counts
+  flavorCounts = {};
+  if(hasFlavors){
+    item.flavors.forEach(fl => flavorCounts[fl] = 0);
 
-    flvMinus.addEventListener("click", ()=>{ qty = Math.max(1, qty-1); flvQtyEl.textContent = qty; });
-    flvPlus.addEventListener("click", ()=>{ qty = qty+1; flvQtyEl.textContent = qty; });
-    flvClose.addEventListener("click", closeFlavorModal);
-    flvOverlay.addEventListener("click", closeFlavorModal);
+    // render rows with +/-
+    item.flavors.forEach(fl=>{
+      const row = document.createElement("div");
+      row.className = "flv-line";
 
-    flvAdd.addEventListener("click", ()=>{
-      if(!currentItem) return;
+      row.innerHTML = `
+        <div class="flv-name">${fl}</div>
+        <div class="flv-ctrl">
+          <button class="flv-mini" type="button" data-flv-minus="${fl}">-</button>
+          <div class="flv-count" data-flv-count="${fl}">0</div>
+          <button class="flv-mini" type="button" data-flv-plus="${fl}">+</button>
+        </div>
+      `;
 
-      const hasFlavors = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
-      const flv = hasFlavors ? selected.slice() : [];
-      const key = makeKey(currentItem, flv);
-
-      cart[key] = (cart[key] || 0) + qty;
-      saveCart();
-      closeFlavorModal();
+      flvFlavors.appendChild(row);
     });
+  }
+  // --- FRUITS (for fruity yogurt) ---
+selectedFruits = [];
+fruitChoices.innerHTML = "";
+fruitChoices.style.display = "none";
+
+// If item has fruits, show fruit chips
+if(item.fruits && item.fruits.length){
+  fruitChoices.style.display = "flex";
+  fruitChoices.style.flexWrap = "wrap";
+  fruitChoices.style.gap = "10px";
+
+  item.fruits.forEach(fr=>{
+    const chip = document.createElement("div");
+    chip.className = "fruit-chip";
+    chip.textContent = fr;
+
+    chip.addEventListener("click", ()=>{
+      const i = selectedFruits.indexOf(fr);
+      if(i >= 0){
+        selectedFruits.splice(i,1);
+        chip.classList.remove("selected");
+      }else{
+        selectedFruits.push(fr);
+        chip.classList.add("selected");
+      }
+      // fruity yogurt doesn't require exact count, so no disable needed
+    });
+
+    fruitChoices.appendChild(chip);
+  });
+}
+
+
+  validateModal();
+  flvOverlay.classList.add("show");
+  flvModal.classList.add("show");
+}
+
+function closeFlavorModal(){
+  flvOverlay.classList.remove("show");
+  flvModal.classList.remove("show");
+}
+
+function refreshFlavorUI(){
+  // update numbers in UI
+  Object.keys(flavorCounts).forEach(fl=>{
+    const el = flvFlavors.querySelector(`[data-flv-count="${CSS.escape(fl)}"]`);
+    if(el) el.textContent = flavorCounts[fl];
+  });
+}
+
+function validateModal(){
+  const hasFlavors = currentItem && currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+
+  if(hasFlavors){
+    const need = currentItem.scoops;
+    const have = totalScoopsSelected();
+    const ok = have === need;
+
+    flvAdd.disabled = !ok;
+    flvHint.textContent = ok ? "" : `Έχεις βάλει ${have}/${need} scoops.`;
+  }else{
+    flvAdd.disabled = false;
+    flvHint.textContent = "";
+  }
+}
+
+// qty (how many of the SAME configured item to add)
+flvMinus.addEventListener("click", ()=>{ qty = Math.max(1, qty-1); flvQtyEl.textContent = qty; });
+flvPlus.addEventListener("click", ()=>{ qty = qty+1; flvQtyEl.textContent = qty; });
+flvClose.addEventListener("click", closeFlavorModal);
+flvOverlay.addEventListener("click", closeFlavorModal);
+
+// plus/minus per flavor (event delegation inside modal)
+flvFlavors.addEventListener("click", (e)=>{
+  if(!currentItem) return;
+  const hasFlavors = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+  if(!hasFlavors) return;
+
+  const need = currentItem.scoops;
+
+  const plusFl = e.target.closest("[data-flv-plus]")?.dataset.flvPlus;
+  if(plusFl){
+    if(totalScoopsSelected() >= need) return; // can't exceed scoops
+    flavorCounts[plusFl] = (flavorCounts[plusFl] || 0) + 1;
+    refreshFlavorUI();
+    validateModal();
+    return;
+  }
+
+  const minusFl = e.target.closest("[data-flv-minus]")?.dataset.flvMinus;
+  if(minusFl){
+    flavorCounts[minusFl] = Math.max(0, (flavorCounts[minusFl] || 0) - 1);
+    refreshFlavorUI();
+    validateModal();
+    return;
+  }
+});
+
+flvAdd.addEventListener("click", ()=>{
+  if(!currentItem) return;
+
+  const hasScoops = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+  const hasFruits = currentItem.fruits && currentItem.fruits.length;
+
+  let key;
+
+  if(hasScoops){
+    // require exact scoops
+    if(totalScoopsSelected() !== currentItem.scoops) return;
+
+    const label = makeFlavorLabelFromCounts(); // "Σοκολάτα x3 / Βανίλια x1"
+    key = makeKey(currentItem, [label]);
+
+  } else if(hasFruits){
+    // fruits are optional (or you can force at least 1)
+    const label = selectedFruits.length ? ("Φρούτα: " + selectedFruits.join(" / ")) : "Φρούτα: (χωρίς)";
+    key = makeKey(currentItem, [label]);
+
+  } else {
+    key = makeKey(currentItem, []);
+  }
+
+  cart[key] = (cart[key] || 0) + qty;
+  saveCart();
+  closeFlavorModal();
+});
+
 
     /* ===== 8) CLICK HANDLERS (Event delegation) ===== */
     document.addEventListener("click", (e)=>{
       const openId = e.target.closest("[data-open]")?.dataset.open;
       if(openId){
-        const item = allItems().find(x=>x.id === openId);
+        const item = allItems().find(x => x.id === openId);
         if(item) openFlavorModal(item);
       }
 
@@ -986,42 +1157,5 @@ function closePointsModal(){
     render();
     updateCartUI();
   </script>
-  <!-- CHECK POINTS MODAL -->
-<div class="points-overlay" id="pointsOverlay"></div>
-
-<div class="points-modal" id="pointsModal">
-
-  <button class="points-close" onclick="closePointsModal()">✕</button>
-
-  <h3>Check Points</h3>
-
-  <input type="tel"
-         id="pointsPhone"
-         class="points-input"
-         placeholder="Enter your phone number"
-         inputmode="numeric"
-         maxlength="8" />
-
-  <button class="points-check-btn" onclick="checkPoints()">
-    Check
-  </button>
-
-  <div id="pointsResult" class="points-result"></div>
-</div>
-
-  <h3>Check Points</h3>
-
-  <input type="tel"
-         id="pointsPhone"
-         class="points-input"
-         placeholder="Enter your phone number" />
-
-  <button class="points-check-btn" onclick="checkPoints()">
-    Check
-  </button>
-
-  <div id="pointsResult" class="points-result"></div>
-</div>
-
 </body>
 </html>
