@@ -48,7 +48,6 @@
       flex-wrap:nowrap;
     }
 
-    /* LEFT: Check Points + Back */
     .leftHead{
       display:flex;
       flex-direction:column;
@@ -57,7 +56,6 @@
       min-width: 160px;
     }
 
-    /* Title button (replaces "–> Skip The Line") */
     .titleBtn{
       border:none;
       background:transparent;
@@ -71,7 +69,6 @@
       white-space:nowrap;
     }
 
-    /* Back arrow under Check Points */
     .backBtn{
       border:none;
       background: rgba(255,255,255,0.65);
@@ -85,7 +82,6 @@
       line-height: 1;
     }
 
-    /* Cart button always right */
     .cartBtn{
       border:none;
       cursor:pointer;
@@ -373,7 +369,7 @@
       font-weight: 900;
     }
 
-    /* ===== Flavors Modal ===== */
+    /* ===== Flavors / Options Modal ===== */
     .flv-overlay{
       position: fixed;
       inset: 0;
@@ -401,6 +397,7 @@
       pointer-events:none;
       transition: opacity .2s ease, transform .2s ease;
       z-index: 130;
+      overflow: hidden; /* important for bottom bar */
     }
     .flv-modal.show{
       opacity:1;
@@ -414,6 +411,7 @@
       justify-content:space-between;
       padding: 14px 14px 10px;
       border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.82);
     }
     .flv-title{ font-weight: 900; font-size: 18px; }
     .flv-close{
@@ -426,53 +424,92 @@
       color: var(--ink);
     }
 
-    .flv-body{ padding: 12px 14px 14px; }
+    .flv-body{
+      padding: 12px 14px 14px;
+      max-height: 65vh;
+      overflow-y: auto;
+      padding-bottom: 110px; /* space for bottom add */
+    }
     .flv-sub{ opacity:.85; font-weight: 800; margin-bottom: 10px; }
 
-    .flv-flavors{
-      display:flex;
-      flex-wrap:wrap;
+    /* rows with counters (used for flavors + fruits) */
+    .flv-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 12px;
     }
-    .flv-chip{
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.78);
-      padding: 10px 12px;
-      border-radius: 16px;
-      cursor:pointer;
-      font-weight: 900;
-      user-select:none;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .flv-chip:hover{ transform: translateY(-1px); }
-    .flv-chip.selected{
-      background: rgba(230,220,230,0.92);
-      border-color: rgba(120,90,120,0.35);
-      box-shadow: 0 8px 16px rgba(90,60,90,0.14);
-    }
 
-    .flv-row{
+    .flv-line{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 12px;
+      gap:10px;
+      padding:10px 10px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.75);
     }
-    .flv-qty{ display:flex; align-items:center; gap: 8px; }
+    .flv-name{ font-weight:900; }
+
+    .flv-ctrl{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .flv-mini{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.9);
+      cursor:pointer;
+      font-weight:900;
+      color: var(--ink);
+    }
+    .flv-count{
+      min-width: 20px;
+      text-align:center;
+      font-weight:900;
+    }
+
+    /* bottom bar (fixed inside modal) */
+    .flv-row{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.97);
+      border-top: 1px solid var(--line);
+      padding: 10px 12px 12px;
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .flv-qty{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+    }
+
     .flv-add{
-      flex:1;
       border:none;
       cursor:pointer;
-      padding: 12px 14px;
+      padding: 14px 14px;
       border-radius: 18px;
       background: linear-gradient(180deg, #7a5a7a, #6a4d6a);
       color:#fff;
       font-weight: 900;
       font-size: 15px;
       box-shadow: 0 10px 18px rgba(90,60,90,0.18);
+      width: 100%;
     }
     .flv-add:disabled{ opacity:.5; cursor:not-allowed; }
-    .flv-hint{ margin-top:10px; font-weight:800; opacity:.85; }
+
+    .flv-hint{ font-weight:800; opacity:.85; text-align:center; }
 
     /* ===== Points Modal ===== */
     .points-overlay{
@@ -533,62 +570,29 @@
       color:#4b3f4b;
       cursor:pointer;
     }
-    /* Flavor counters (allow repeats) */
-.flv-line{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:10px 10px;
-  border-radius:16px;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,0.75);
-}
 
-.flv-name{
-  font-weight:900;
-}
+    /* ===== Mobile tuning ===== */
+    @media (max-width:520px){
+      .tabs{ gap:8px; padding:6px 8px 8px; }
+      .tab{ padding:7px 10px; border-radius:14px; font-size:12px; }
 
-.flv-ctrl{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+      .card{ grid-template-columns: 1fr 72px; gap:10px; padding:10px; border-radius:16px; }
+      .thumb{ width:72px; height:72px; border-radius:14px; }
+      .name{ font-size:14px; }
+      .desc{ font-size:12px; margin-bottom:6px; }
+      .addBtn{ padding:7px 10px; border-radius:12px; font-size:13px; gap:6px; }
+      .plus{ width:20px; height:20px; }
 
-.flv-mini{
-  width:34px;
-  height:34px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,0.9);
-  cursor:pointer;
-  font-weight:900;
-  color: var(--ink);
-}
-
-.flv-count{
-  min-width: 20px;
-  text-align:center;
-  font-weight:900;
-}
-/* Fruits chips */
-.fruit-chip{
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.78);
-  padding: 10px 12px;
-  border-radius: 16px;
-  cursor:pointer;
-  font-weight: 900;
-  user-select:none;
-  transition: transform .12s ease, background .12s ease, border-color .12s ease;
-}
-.fruit-chip:hover{ transform: translateY(-1px); }
-.fruit-chip.selected{
-  background: rgba(230,220,230,0.92);
-  border-color: rgba(120,90,120,0.35);
-  box-shadow: 0 8px 16px rgba(90,60,90,0.14);
-}
-
+      .flv-modal{ top:54%; border-radius:18px; }
+      .flv-grid{ gap:8px; }
+      .flv-line{ padding:8px; border-radius:14px; }
+      .flv-name{ font-size:12.5px; line-height:1.1; }
+      .flv-mini{ width:28px; height:28px; border-radius:10px; font-size:14px; }
+      .flv-count{ min-width:18px; font-size:13px; }
+      .flv-add{ border-radius:16px; font-size:14px; }
+      .qBtn{ width:30px; height:30px; border-radius:10px; font-size:16px; }
+      .qNum{ font-size:14px; }
+    }
   </style>
 </head>
 
@@ -597,7 +601,7 @@
     <div class="brandRow">
       <div class="leftHead">
         <button class="titleBtn" type="button" onclick="openCheckPoints()">
-          Check Points
+          Check My Points
         </button>
 
         <button class="backBtn" type="button" onclick="goBack()">
@@ -660,8 +664,9 @@
     </div>
   </aside>
 
-  <!-- Flavors modal -->
+  <!-- Options modal -->
   <div class="flv-overlay" id="flvOverlay"></div>
+
   <div class="flv-modal" id="flvModal" role="dialog" aria-modal="true">
     <div class="flv-head">
       <div class="flv-title" id="flvTitle">Επιλογή</div>
@@ -670,27 +675,29 @@
 
     <div class="flv-body">
       <div class="flv-sub" id="flvSub"></div>
-      <div class="flv-flavors" id="flvFlavors"></div>
-<!-- Fruits picker (only for fruity yogurt) -->
-<div class="flv-flavors" id="fruitChoices" style="display:none;"></div>
 
-      <div class="flv-row">
-        <div class="flv-qty">
-          <button class="qBtn" id="flvMinus" type="button">-</button>
-          <div class="qNum" id="flvQty">1</div>
-          <button class="qBtn" id="flvPlus" type="button">+</button>
-        </div>
+      <!-- Ice cream flavors -->
+      <div class="flv-grid" id="flvFlavors" style="display:none;"></div>
 
-        <button class="flv-add" id="flvAdd" type="button">Προσθήκη στο καλάθι</button>
+      <!-- Fruity yogurt fruits -->
+      <div class="flv-grid" id="fruitChoices" style="display:none;"></div>
+    </div>
+
+    <!-- bottom fixed area -->
+    <div class="flv-row">
+      <div class="flv-qty" id="qtyRow">
+        <button class="qBtn" id="flvMinus" type="button">-</button>
+        <div class="qNum" id="flvQty">1</div>
+        <button class="qBtn" id="flvPlus" type="button">+</button>
       </div>
 
+      <button class="flv-add" id="flvAdd" type="button">Προσθήκη στο καλάθι</button>
       <div class="flv-hint" id="flvHint"></div>
     </div>
   </div>
 
   <!-- CHECK POINTS MODAL -->
   <div class="points-overlay" id="pointsOverlay"></div>
-
   <div class="points-modal" id="pointsModal">
     <button class="points-close" type="button" onclick="closePointsModal()">✕</button>
 
@@ -711,15 +718,12 @@
   </div>
 
   <script>
-    function goBack(){
-      window.history.back();
-    }
+    function goBack(){ window.history.back(); }
 
     function openCheckPoints(){
       document.getElementById("pointsOverlay").style.display="block";
       document.getElementById("pointsModal").style.display="block";
 
-      // allow only numbers in phone input
       const phoneInput = document.getElementById("pointsPhone");
       if(phoneInput && !phoneInput.dataset.bound){
         phoneInput.addEventListener("input", function(){
@@ -727,40 +731,27 @@
         });
         phoneInput.dataset.bound = "1";
       }
-
-      // clear old result
       document.getElementById("pointsResult").innerHTML="";
     }
 
     function checkPoints(){
       const phone = document.getElementById("pointsPhone").value;
-
-      if(!phone){
-        alert("Write your phone number");
-        return;
-      }
-
-      // DEMO (μετά θα τραβάει από Django)
+      if(!phone){ alert("Write your phone number"); return; }
       let points = localStorage.getItem("demo_points") || 0;
-
-      document.getElementById("pointsResult").innerHTML =
-        "Your points: " + points + " 🍦";
+      document.getElementById("pointsResult").innerHTML = "Your points: " + points + " 🍦";
     }
 
     function closePointsModal(){
       document.getElementById("pointsOverlay").style.display="none";
       document.getElementById("pointsModal").style.display="none";
     }
-
-    // close when clicking outside
     document.getElementById("pointsOverlay").addEventListener("click", closePointsModal);
   </script>
 
   <script>
     /* ===== 1) PRODUCTS (EDIT HERE) ===== */
     const FLAVORS = ["Βανίλια","Σοκολάτα","Φράουλα","Μαστίχα","Cookies","Φιστίκι","Μπανάνα","Καραμέλα"];
-    const FRUITS = ["Φρούτα δάσους","Φράουλα","Μπανάνα"];
-
+    const FRUITS  = ["Φρούτα δάσους","Φράουλα","Μπανάνα"];
 
     const PRODUCTS = {
       pagota: [
@@ -769,19 +760,20 @@
         { id:"p3", name:"Παγωτό Στέβια 3 Μπάλες", desc:"Γιαούρτι, σοκολάτα, φράουλα, ροδάκινο", price:7.00, image:"", scoops:3, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
         { id:"p4", name:"Παγωτό Thermo Box 8 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:13.50, image:"", scoops:8, flavors:FLAVORS },
       ],
-    fruity: [
-  { id:"f1", name:"Fruity Yogurt Bowl", desc:"Γιαούρτι + φρούτα + toppings", price:5.50, image:"", fruits:FRUITS },
-  { id:"f2", name:"Fruity Yogurt Mini", desc:"Μικρό μέγεθος", price:4.00, image:"", fruits:FRUITS },
-],
-
+      fruity: [
+        /* fruitMax = πόσα “fruits” θα βάλουν συνολικά (όπως scoops). Άλλαξέ το όποτε θέλεις */
+        { id:"f1", name:"Fruity Yogurt Bowl", desc:"Γιαούρτι + φρούτα + toppings", price:5.50, image:"", fruits:FRUITS, fruitMax:2 },
+        { id:"f2", name:"Fruity Yogurt Mini", desc:"Μικρό μέγεθος", price:4.00, image:"", fruits:FRUITS, fruitMax:2 },
+      ],
       xonakia: [
         { id:"x1", name:"Χωνάκι 1 Μπάλα", desc:"Διάλεξε γεύση", price:2.50, image:"", scoops:1, flavors:FLAVORS },
         { id:"x2", name:"Χωνάκι 2 Μπάλες", desc:"Διάλεξε γεύσεις", price:4.00, image:"", scoops:2, flavors:FLAVORS },
       ],
       anapsyktika: [
-        { id:"a1", name:"Coca-Cola 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"" },
-        { id:"a2", name:"Sprite 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"" },
-        { id:"a3", name:"Νερό 500ml", desc:"", price:1.00, image:"" },
+        /* qtySelectable=true => θα δείξει το - 1 + για ποσότητα */
+        { id:"a1", name:"Coca-Cola 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"", qtySelectable:true },
+        { id:"a2", name:"Sprite 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"", qtySelectable:true },
+        { id:"a3", name:"Νερό 500ml", desc:"", price:1.00, image:"", qtySelectable:true },
       ]
     };
 
@@ -791,9 +783,20 @@
     function baseId(key){ return key.split("|")[0]; }
     function flavorText(key){ const p = key.split("|"); return p[1] ? p[1].trim() : ""; }
     function findItem(key){ return allItems().find(x => x.id === baseId(key)); }
-    function makeKey(item, flavors){
-      if(!flavors || flavors.length === 0) return item.id;
-      return item.id + "|" + flavors.join(" / ");
+    function makeKey(item, labels){
+      if(!labels || labels.length === 0) return item.id;
+      return item.id + "|" + labels.join(" / ");
+    }
+
+    function makeLabelFromCounts(prefix, countsObj){
+      const parts = Object.entries(countsObj)
+        .filter(([_,c]) => c > 0)
+        .map(([name,c]) => `${name} x${c}`);
+      return prefix + ": " + (parts.length ? parts.join(" / ") : "(χωρίς)");
+    }
+
+    function totalSelected(countsObj){
+      return Object.values(countsObj).reduce((a,b)=>a+b,0);
     }
 
     /* ===== 3) RENDER CARDS ===== */
@@ -827,7 +830,7 @@
     }
 
     /* ===== 4) CART (localStorage) ===== */
-    const CART_KEY = "pahitice_cart_v2";
+    const CART_KEY = "pahitice_cart_v3";
     let cart = JSON.parse(localStorage.getItem(CART_KEY) || "{}"); // { key: qty }
 
     function saveCart(){
@@ -848,22 +851,14 @@
       return total;
     }
 
-    function inc(key){
-      cart[key] = (cart[key] || 0) + 1;
-      saveCart();
-    }
-
+    function inc(key){ cart[key] = (cart[key] || 0) + 1; saveCart(); }
     function dec(key){
       if(!cart[key]) return;
       cart[key] -= 1;
       if(cart[key] <= 0) delete cart[key];
       saveCart();
     }
-
-    function clearCart(){
-      cart = {};
-      saveCart();
-    }
+    function clearCart(){ cart = {}; saveCart(); }
 
     function updateCartUI(){
       document.getElementById("cartCount").textContent = cartCount();
@@ -885,7 +880,7 @@
           <div class="cartItem">
             <div>
               <div class="cn">${it.name}</div>
-              ${flv ? `<div class="flv">Γεύσεις: ${flv}</div>` : ``}
+              ${flv ? `<div class="flv">${flv}</div>` : ``}
               <div class="cp">${euro(it.price)}</div>
             </div>
             <div class="qty">
@@ -938,212 +933,231 @@
     document.getElementById("clearBtn").addEventListener("click", clearCart);
     document.getElementById("checkoutBtn").addEventListener("click", ()=>alert("Εδώ μετά βάζουμε checkout/στοιχεία πελάτη."));
 
-   /* ===== 7) FLAVORS MODAL (ALLOW REPEATS) ===== */
-const flvOverlay = document.getElementById("flvOverlay");
-const flvModal   = document.getElementById("flvModal");
-const flvTitle   = document.getElementById("flvTitle");
-const flvSub     = document.getElementById("flvSub");
-const flvFlavors = document.getElementById("flvFlavors");
+    /* ===== 7) OPTIONS MODAL ===== */
+    const flvOverlay = document.getElementById("flvOverlay");
+    const flvModal   = document.getElementById("flvModal");
+    const flvTitle   = document.getElementById("flvTitle");
+    const flvSub     = document.getElementById("flvSub");
+    const flvFlavors = document.getElementById("flvFlavors");
+    const fruitChoices = document.getElementById("fruitChoices");
+    const flvHint    = document.getElementById("flvHint");
+    const qtyRow     = document.getElementById("qtyRow");
+    const flvQtyEl   = document.getElementById("flvQty");
+    const flvMinus   = document.getElementById("flvMinus");
+    const flvPlus    = document.getElementById("flvPlus");
+    const flvAdd     = document.getElementById("flvAdd");
+    const flvClose   = document.getElementById("flvClose");
 
-const fruitChoices = document.getElementById("fruitChoices");
+    let currentItem = null;
+    let qty = 1;
 
-const flvHint    = document.getElementById("flvHint");
-const flvQtyEl   = document.getElementById("flvQty");
-const flvMinus   = document.getElementById("flvMinus");
-const flvPlus    = document.getElementById("flvPlus");
-const flvAdd     = document.getElementById("flvAdd");
-const flvClose   = document.getElementById("flvClose");
+    let flavorCounts = {}; // for ice cream
+    let fruitCounts  = {}; // for fruity yogurt
 
-let currentItem = null;
-let qty = 1;
+    function openOptionsModal(item){
+      currentItem = item;
+      qty = 1;
+      flvQtyEl.textContent = qty;
+      flvTitle.textContent = item.name;
 
-// counts per flavor, e.g. { "Σοκολάτα": 3, "Βανίλια": 0 }
-let flavorCounts = {};
-let selectedFruits = [];
+      // reset ui
+      flvHint.textContent = "";
+      flvFlavors.innerHTML = "";
+      fruitChoices.innerHTML = "";
+      flvFlavors.style.display = "none";
+      fruitChoices.style.display = "none";
 
-function totalScoopsSelected(){
-  return Object.values(flavorCounts).reduce((a,b)=>a+b,0);
-}
+      // decide what user is selecting
+      const hasScoops = item.scoops && item.flavors && item.flavors.length;
+      const hasFruits = item.fruits && item.fruits.length;
+      const wantsQty  = !!item.qtySelectable;
 
-function makeFlavorLabelFromCounts(){
-  // returns string like: "Σοκολάτα x3 / Βανίλια x1"
-  const parts = Object.entries(flavorCounts)
-    .filter(([_,c]) => c > 0)
-    .map(([fl,c]) => `${fl} x${c}`);
-  return parts.join(" / ");
-}
+      // show qty only for drinks (or any item with qtySelectable)
+      qtyRow.style.display = wantsQty ? "flex" : "none";
 
-function openFlavorModal(item){
-  currentItem = item;
-  qty = 1;
-  flvQtyEl.textContent = qty;
-  flvTitle.textContent = item.name;
+      if(hasScoops){
+        flvSub.textContent = `Διάλεξε ${item.scoops} scoops (μπορείς και ίδια γεύση πολλές φορές)`;
+        flvFlavors.style.display = "grid";
+        flavorCounts = {};
+        item.flavors.forEach(n => flavorCounts[n] = 0);
 
-  const hasFlavors = item.scoops && item.flavors && item.flavors.length;
-  flvSub.textContent = hasFlavors
-    ? `Διάλεξε ${item.scoops} scoops (μπορείς και ίδια γεύση πολλές φορές)`
-    : `Πόσα θέλεις να προσθέσεις;`;
+        item.flavors.forEach(n=>{
+          const row = document.createElement("div");
+          row.className = "flv-line";
+          row.innerHTML = `
+            <div class="flv-name">${n}</div>
+            <div class="flv-ctrl">
+              <button class="flv-mini" type="button" data-flv-minus="${n}">-</button>
+              <div class="flv-count" data-flv-count="${n}">0</div>
+              <button class="flv-mini" type="button" data-flv-plus="${n}">+</button>
+            </div>
+          `;
+          flvFlavors.appendChild(row);
+        });
 
-  flvHint.textContent = "";
-  flvFlavors.innerHTML = "";
+      } else if(hasFruits){
+        const max = item.fruitMax ?? 2;
+        flvSub.textContent = `Διάλεξε ${max} φρούτα (μπορείς και ίδια πολλές φορές)`;
+        fruitChoices.style.display = "grid";
+        fruitCounts = {};
+        item.fruits.forEach(n => fruitCounts[n] = 0);
 
-  // reset counts
-  flavorCounts = {};
-  if(hasFlavors){
-    item.flavors.forEach(fl => flavorCounts[fl] = 0);
+        item.fruits.forEach(n=>{
+          const row = document.createElement("div");
+          row.className = "flv-line";
+          row.innerHTML = `
+            <div class="flv-name">${n}</div>
+            <div class="flv-ctrl">
+              <button class="flv-mini" type="button" data-fr-minus="${n}">-</button>
+              <div class="flv-count" data-fr-count="${n}">0</div>
+              <button class="flv-mini" type="button" data-fr-plus="${n}">+</button>
+            </div>
+          `;
+          fruitChoices.appendChild(row);
+        });
 
-    // render rows with +/-
-    item.flavors.forEach(fl=>{
-      const row = document.createElement("div");
-      row.className = "flv-line";
-
-      row.innerHTML = `
-        <div class="flv-name">${fl}</div>
-        <div class="flv-ctrl">
-          <button class="flv-mini" type="button" data-flv-minus="${fl}">-</button>
-          <div class="flv-count" data-flv-count="${fl}">0</div>
-          <button class="flv-mini" type="button" data-flv-plus="${fl}">+</button>
-        </div>
-      `;
-
-      flvFlavors.appendChild(row);
-    });
-  }
-  // --- FRUITS (for fruity yogurt) ---
-selectedFruits = [];
-fruitChoices.innerHTML = "";
-fruitChoices.style.display = "none";
-
-// If item has fruits, show fruit chips
-if(item.fruits && item.fruits.length){
-  fruitChoices.style.display = "flex";
-  fruitChoices.style.flexWrap = "wrap";
-  fruitChoices.style.gap = "10px";
-
-  item.fruits.forEach(fr=>{
-    const chip = document.createElement("div");
-    chip.className = "fruit-chip";
-    chip.textContent = fr;
-
-    chip.addEventListener("click", ()=>{
-      const i = selectedFruits.indexOf(fr);
-      if(i >= 0){
-        selectedFruits.splice(i,1);
-        chip.classList.remove("selected");
-      }else{
-        selectedFruits.push(fr);
-        chip.classList.add("selected");
+      } else {
+        // simple item (if not qtySelectable, add 1)
+        flvSub.textContent = wantsQty ? "Διάλεξε ποσότητα:" : "Προσθήκη στο καλάθι";
       }
-      // fruity yogurt doesn't require exact count, so no disable needed
+
+      validateModal();
+      flvOverlay.classList.add("show");
+      flvModal.classList.add("show");
+    }
+
+    function closeOptionsModal(){
+      flvOverlay.classList.remove("show");
+      flvModal.classList.remove("show");
+    }
+
+    function refreshCountsUI(){
+      // flavors
+      Object.keys(flavorCounts).forEach(name=>{
+        const el = flvFlavors.querySelector(`[data-flv-count="${CSS.escape(name)}"]`);
+        if(el) el.textContent = flavorCounts[name];
+      });
+      // fruits
+      Object.keys(fruitCounts).forEach(name=>{
+        const el = fruitChoices.querySelector(`[data-fr-count="${CSS.escape(name)}"]`);
+        if(el) el.textContent = fruitCounts[name];
+      });
+    }
+
+    function validateModal(){
+      if(!currentItem) return;
+
+      const hasScoops = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+      const hasFruits = currentItem.fruits && currentItem.fruits.length;
+
+      if(hasScoops){
+        const need = currentItem.scoops;
+        const have = totalSelected(flavorCounts);
+        flvAdd.disabled = have !== need;
+        flvHint.textContent = (have !== need) ? `Έχεις βάλει ${have}/${need} scoops.` : "";
+
+      } else if(hasFruits){
+        const need = currentItem.fruitMax ?? 2;
+        const have = totalSelected(fruitCounts);
+        flvAdd.disabled = have !== need;
+        flvHint.textContent = (have !== need) ? `Έχεις βάλει ${have}/${need} φρούτα.` : "";
+
+      } else {
+        flvAdd.disabled = false;
+        flvHint.textContent = "";
+      }
+    }
+
+    // qty buttons (only when qtyRow is visible)
+    flvMinus.addEventListener("click", ()=>{ qty = Math.max(1, qty-1); flvQtyEl.textContent = qty; });
+    flvPlus.addEventListener("click", ()=>{ qty = qty+1; flvQtyEl.textContent = qty; });
+
+    flvClose.addEventListener("click", closeOptionsModal);
+    flvOverlay.addEventListener("click", closeOptionsModal);
+
+    // plus/minus counters (event delegation)
+    flvFlavors.addEventListener("click", (e)=>{
+      if(!currentItem) return;
+      const hasScoops = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+      if(!hasScoops) return;
+
+      const need = currentItem.scoops;
+
+      const plus = e.target.closest("[data-flv-plus]")?.dataset.flvPlus;
+      if(plus){
+        if(totalSelected(flavorCounts) >= need) return;
+        flavorCounts[plus] = (flavorCounts[plus] || 0) + 1;
+        refreshCountsUI(); validateModal(); return;
+      }
+
+      const minus = e.target.closest("[data-flv-minus]")?.dataset.flvMinus;
+      if(minus){
+        flavorCounts[minus] = Math.max(0, (flavorCounts[minus] || 0) - 1);
+        refreshCountsUI(); validateModal(); return;
+      }
     });
 
-    fruitChoices.appendChild(chip);
-  });
-}
+    fruitChoices.addEventListener("click", (e)=>{
+      if(!currentItem) return;
+      const hasFruits = currentItem.fruits && currentItem.fruits.length;
+      if(!hasFruits) return;
 
+      const need = currentItem.fruitMax ?? 2;
 
-  validateModal();
-  flvOverlay.classList.add("show");
-  flvModal.classList.add("show");
-}
+      const plus = e.target.closest("[data-fr-plus]")?.dataset.frPlus;
+      if(plus){
+        if(totalSelected(fruitCounts) >= need) return;
+        fruitCounts[plus] = (fruitCounts[plus] || 0) + 1;
+        refreshCountsUI(); validateModal(); return;
+      }
 
-function closeFlavorModal(){
-  flvOverlay.classList.remove("show");
-  flvModal.classList.remove("show");
-}
+      const minus = e.target.closest("[data-fr-minus]")?.dataset.frMinus;
+      if(minus){
+        fruitCounts[minus] = Math.max(0, (fruitCounts[minus] || 0) - 1);
+        refreshCountsUI(); validateModal(); return;
+      }
+    });
 
-function refreshFlavorUI(){
-  // update numbers in UI
-  Object.keys(flavorCounts).forEach(fl=>{
-    const el = flvFlavors.querySelector(`[data-flv-count="${CSS.escape(fl)}"]`);
-    if(el) el.textContent = flavorCounts[fl];
-  });
-}
+    flvAdd.addEventListener("click", ()=>{
+      if(!currentItem) return;
 
-function validateModal(){
-  const hasFlavors = currentItem && currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+      const hasScoops = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
+      const hasFruits = currentItem.fruits && currentItem.fruits.length;
+      const wantsQty  = !!currentItem.qtySelectable;
 
-  if(hasFlavors){
-    const need = currentItem.scoops;
-    const have = totalScoopsSelected();
-    const ok = have === need;
+      let key = currentItem.id;
 
-    flvAdd.disabled = !ok;
-    flvHint.textContent = ok ? "" : `Έχεις βάλει ${have}/${need} scoops.`;
-  }else{
-    flvAdd.disabled = false;
-    flvHint.textContent = "";
-  }
-}
+      if(hasScoops){
+        if(totalSelected(flavorCounts) !== currentItem.scoops) return;
+        const label = makeLabelFromCounts("Γεύσεις", flavorCounts);
+        key = makeKey(currentItem, [label]);
 
-// qty (how many of the SAME configured item to add)
-flvMinus.addEventListener("click", ()=>{ qty = Math.max(1, qty-1); flvQtyEl.textContent = qty; });
-flvPlus.addEventListener("click", ()=>{ qty = qty+1; flvQtyEl.textContent = qty; });
-flvClose.addEventListener("click", closeFlavorModal);
-flvOverlay.addEventListener("click", closeFlavorModal);
+        cart[key] = (cart[key] || 0) + 1;
 
-// plus/minus per flavor (event delegation inside modal)
-flvFlavors.addEventListener("click", (e)=>{
-  if(!currentItem) return;
-  const hasFlavors = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
-  if(!hasFlavors) return;
+      } else if(hasFruits){
+        const need = currentItem.fruitMax ?? 2;
+        if(totalSelected(fruitCounts) !== need) return;
+        const label = makeLabelFromCounts("Φρούτα", fruitCounts);
+        key = makeKey(currentItem, [label]);
 
-  const need = currentItem.scoops;
+        cart[key] = (cart[key] || 0) + 1;
 
-  const plusFl = e.target.closest("[data-flv-plus]")?.dataset.flvPlus;
-  if(plusFl){
-    if(totalScoopsSelected() >= need) return; // can't exceed scoops
-    flavorCounts[plusFl] = (flavorCounts[plusFl] || 0) + 1;
-    refreshFlavorUI();
-    validateModal();
-    return;
-  }
+      } else {
+        // drinks (qty) or simple item
+        const addQty = wantsQty ? qty : 1;
+        cart[key] = (cart[key] || 0) + addQty;
+      }
 
-  const minusFl = e.target.closest("[data-flv-minus]")?.dataset.flvMinus;
-  if(minusFl){
-    flavorCounts[minusFl] = Math.max(0, (flavorCounts[minusFl] || 0) - 1);
-    refreshFlavorUI();
-    validateModal();
-    return;
-  }
-});
-
-flvAdd.addEventListener("click", ()=>{
-  if(!currentItem) return;
-
-  const hasScoops = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
-  const hasFruits = currentItem.fruits && currentItem.fruits.length;
-
-  let key;
-
-  if(hasScoops){
-    // require exact scoops
-    if(totalScoopsSelected() !== currentItem.scoops) return;
-
-    const label = makeFlavorLabelFromCounts(); // "Σοκολάτα x3 / Βανίλια x1"
-    key = makeKey(currentItem, [label]);
-
-  } else if(hasFruits){
-    // fruits are optional (or you can force at least 1)
-    const label = selectedFruits.length ? ("Φρούτα: " + selectedFruits.join(" / ")) : "Φρούτα: (χωρίς)";
-    key = makeKey(currentItem, [label]);
-
-  } else {
-    key = makeKey(currentItem, []);
-  }
-
-  cart[key] = (cart[key] || 0) + qty;
-  saveCart();
-  closeFlavorModal();
-});
-
+      saveCart();
+      closeOptionsModal();
+    });
 
     /* ===== 8) CLICK HANDLERS (Event delegation) ===== */
     document.addEventListener("click", (e)=>{
       const openId = e.target.closest("[data-open]")?.dataset.open;
       if(openId){
         const item = allItems().find(x => x.id === openId);
-        if(item) openFlavorModal(item);
+        if(item) openOptionsModal(item);
       }
 
       const incKey = e.target.closest("[data-inc]")?.dataset.inc;
