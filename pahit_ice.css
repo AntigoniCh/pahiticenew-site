@@ -38,78 +38,75 @@ body > *{
   z-index: 1;
 }
 
-
 /* =========================
    BOTTOM MENU (HORIZONTAL ICONS)
    ========================= */
 .side-menu{
   position: fixed;
   left: 0;
-  bottom: 14px;           /* ✅ φαίνεται πάντα */
+  bottom: 14px;
   width: 100%;
-
   height: auto;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 14px;
+  gap: 1px;
 
   z-index: 9998;
-  padding: 10px 16px;
+  padding: 10px 12px;
 
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 -6px 20px rgba(0,0,0,0.2);
 }
 
-
-
-/* icon buttons */
-/* 🔥 ΚΑΝΕ ΟΛΑ ΤΑ ICONS ΙΔΙΑ */
 .side-menu a{
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
+  width: 62px;
+  height: 62px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
   text-decoration: none;
- 
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-
-  transition: all 0.15s ease;
 }
 
-/* hover */
-.side-menu a:hover{
-  transform: scale(1.08);
-  background: #ffffff;
-}
-
-/* 🔥 icons (instagram, facebook) */
-.side-menu i{
-  font-size: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 🔥 images (bolt, wolt, maps κτλ) */
+/* ΟΛΑ ΤΑ LOGOS / IMAGES */
 .menu-icon{
   width: 47px;
   height: 47px;
   object-fit: contain;
   display: block;
-  filter: none;
+}
+
+/* 🔥 FONT ICONS (Instagram / Facebook FIX) */
+.side-menu i.menu-icon{
+  font-size: 32px;   /* 👈 μικρότερο από πριν */
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* μικρό fix για τα image logos */
+.side-menu img.menu-icon{
+  width: 50px;
+  height:50px;
+  object-fit: contain;
+}
+
+/* hover */
+.side-menu a:hover{
+  transform: scale(1.08);
 }
 
 /* colors */
 .side-menu .fa-instagram{ color: #dd1d40; }
 .side-menu .fa-facebook-f{ color: #2765b6; }
-
 
 .order-btn-under{
   white-space: nowrap;
@@ -119,7 +116,7 @@ body > *{
   position: absolute;
   top: 70%;
   left: 50%;
-    padding: 8px 16px;
+  padding: 8px 16px;
   transform: translateX(-50%);
   border-radius: 18px;
 
@@ -127,22 +124,21 @@ body > *{
   font-family: "Baloo 2", sans-serif;
   font-weight: 800;
   font-size: 18px;
-  color: #4b493f;   /* soft purple text */
+  color: #4b493f;
 
-  /* 💜 BACKGROUND SAME FAMILY AS YOUR BG */
-     background: linear-gradient(
+  background: linear-gradient(
     180deg,
     #c1aa7a 0%,
     #d8dda1 100%
-    
   );
 
- border: 2px solid rgba(110,85,110,0.55);
+  border: 2px solid rgba(110,85,110,0.55);
 
   box-shadow:
-    0 3px 0 rgba(110,85,110,0.55),   /* κάτω γραμμή */
+    0 3px 0 rgba(110,85,110,0.55),
     0 8px 16px rgba(90,60,90,0.18),
     inset 0 2px 4px rgba(255,255,255,0.6);
+
   z-index: 5;
   transition: all .18s ease;
 }
@@ -162,4 +158,3 @@ body > *{
     0 4px 8px rgba(90,60,90,0.18),
     inset 0 3px 6px rgba(0,0,0,0.1);
 }
-
