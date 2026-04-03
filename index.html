@@ -1,86 +1,160 @@
-<!DOCTYPE html>
-<html lang="el">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="pahit_ice.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&display=swap" rel="stylesheet">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html, body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
+/* BACKGROUND */
+body{
+  min-height: 100svh;
+  background: url("./background4.png") no-repeat center center;
+  background-size: cover;
+  background-color: #c8bdc8;
+}
 
-  <title>PAHIT ICE</title>
-</head>
+/* desktop: να φαίνεται ολόκληρη η φωτο */
+@media (min-width: 769px){
+  body{ background-size: contain; }
+}
 
-<body>
+/* transparent layer */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.10);
+  z-index: 0;
+}
 
-<!-- ORDER BUTTON κάτω από Lick Love Live -->
-<a href="./html files/choose.html"
-   class="order-btn-under">
-   Skip The Line
-</a>
+/* keep content above overlay */
+body > *{
+  position: relative;
+  z-index: 1;
+}
 
+/* =========================
+   BOTTOM MENU (HORIZONTAL ICONS)
+   ========================= */
+.side-menu{
+  position: fixed;
+  left: 0;
+  bottom: 14px;
+  width: 100%;
+  height: auto;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
 
-<!-- Side menu -->
-<div id="sideMenu" class="side-menu">
+  z-index: 9998;
+  padding: 10px 12px;
 
-  <a href="https://www.instagram.com/pahitice_ayiafyla?igsh=MXA5ZGI1M2Ryc3hwMw==" target="_blank">
-    <i class="fa-brands fa-instagram" class="menu-icon"></i>
-   
-  </a>
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 -6px 20px rgba(0,0,0,0.2);
+}
 
-  <a href="https://www.facebook.com/share/1AiwyA5Jf2/" target="_blank">
-    <i class="fa-brands fa-facebook-f"></i>
-    
-  </a>
+.side-menu a{
+  width: 62px;
+  height: 62px;
 
-  <a href="https://food.bolt.eu/el-gr/442-limassol/p/45169-pahit-ice-ayia-fyla/" target="_blank">
-    <img src="./bolt logo/bolt-food-seeklogo.png" class="menu-icon">
-   
-  </a>
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  <a href="https://www.waze.com/el/live-map/directions/cy/lemesos/lemesos/pahit-ice-ayia-fyla?to=place.ChIJk1WN4Ycz5xQRENKflagiX_Q" target="_blank">
-    <img src="./bolt logo/waze.png" class="menu-icon">
-   
-  </a>
-  <a href="https://www.google.com/maps/dir//Pahit+Ice+Ayia+Fyla,+%CE%91%CE%B3%CE%AF%CE%B1%CF%82+%CE%A6%CF%85%CE%BB%CE%AC%CE%BE%CE%B5%CF%89%CF%82+32%CE%91,+%CE%9B%CE%B5%CE%BC%CE%B5%CF%83%CF%8C%CF%82+3117,+%CE%9A%CF%8D%CF%80%CF%81%CE%BF%CF%82/@35.1799243,33.3373909,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x14e73387e18d5593:0xf45f22a8959fd210!2m2!1d33.0228887!2d34.7160104?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-    <img src="./bolt logo/pin.png" class="menu-icon">
-    <!-- WOLT -->
-<a href="https://wolt.com/el/cyp/limassol/restaurant/pahit-ice-agia-fyla" target="_blank">
-  <img src="./bolt logo/wolt.png" class="menu-icon" alt="Wolt">
-</a>
-  
+  text-decoration: none;
+  border-radius: 16px;
+  overflow: hidden;
+}
 
-</div> <!-- ✅ ΚΛΕΙΝΕΙ ΤΟ sideMenu -->
+/* ΟΛΑ ΤΑ LOGOS / IMAGES */
+.menu-icon{
+  width: 47px;
+  height: 47px;
+  object-fit: contain;
+  display: block;
+}
 
-   
-  </a>
+/* 🔥 FONT ICONS (Instagram / Facebook FIX) */
+.side-menu i.menu-icon{
+  font-size: 32px;   /* 👈 μικρότερο από πριν */
+  width: 42px;
+  height: 42px;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* μικρό fix για τα image logos */
+.side-menu img.menu-icon{
+  width: 50px;
+  height:50px;
+  object-fit: contain;
+}
 
-<script>
-const menuBtn = document.querySelector(".menu-btn");
-const sideMenu = document.getElementById("sideMenu");
+/* hover */
+.side-menu a:hover{
+  transform: scale(1.08);
+}
 
-menuBtn.addEventListener("click", function (e) {
-  e.stopPropagation();
-  sideMenu.classList.toggle("active");
-  menuBtn.classList.toggle("hide");
-});
+/* colors */
+.side-menu .fa-instagram{ color: #dd1d40; }
+.side-menu .fa-facebook-f{ color: #2765b6; }
 
-document.addEventListener("click", function () {
-  if (sideMenu.classList.contains("active")) {
-    sideMenu.classList.remove("active");
-    menuBtn.classList.remove("hide");
-  }
-});
+.order-btn-under{
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  padding: 8px 16px;
+  transform: translateX(-50%);
+  border-radius: 18px;
 
-sideMenu.addEventListener("click", function (e) {
-  e.stopPropagation();
-});
-</script>
+  text-decoration: none;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #4b493f;
 
+  background: linear-gradient(
+    180deg,
+    #c1aa7a 0%,
+    #d8dda1 100%
+  );
 
+  border: 2px solid rgba(110,85,110,0.55);
 
-</body>
-</html>
+  box-shadow:
+    0 3px 0 rgba(110,85,110,0.55),
+    0 8px 16px rgba(90,60,90,0.18),
+    inset 0 2px 4px rgba(255,255,255,0.6);
+
+  z-index: 5;
+  transition: all .18s ease;
+}
+
+/* hover */
+.order-btn-under:hover{
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow:
+    0 10px 18px rgba(90,60,90,0.25),
+    inset 0 2px 6px rgba(255,255,255,0.7);
+}
+
+/* click */
+.order-btn-under:active{
+  transform: translateX(-50%) translateY(2px);
+  box-shadow:
+    0 4px 8px rgba(90,60,90,0.18),
+    inset 0 3px 6px rgba(0,0,0,0.1);
+}
