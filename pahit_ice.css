@@ -85,8 +85,8 @@ body > *{
 /* 🔥 FONT ICONS (Instagram / Facebook FIX) */
 .side-menu i.menu-icon{
   font-size: 33px;   /* 👈 μικρότερο από πριν */
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
 
   display: flex;
   align-items: center;
