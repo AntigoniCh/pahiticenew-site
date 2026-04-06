@@ -28,7 +28,6 @@
       overflow-x:hidden;
     }
 
-    /* ===== Top sticky (title + tabs) ===== */
     .top{
       position: sticky;
       top: 0;
@@ -136,7 +135,6 @@
       box-shadow: 0 8px 16px rgba(90,60,90,0.14);
     }
 
-    /* ===== Content ===== */
     .container{
       width: min(980px, 94vw);
       margin: 14px auto 110px;
@@ -147,7 +145,7 @@
       padding-top: 8px;
     }
     .sectionTitle{
-      font-size: 18px;
+      font-size: 22px;
       font-weight: 900;
       margin: 8px 2px 10px;
     }
@@ -244,7 +242,6 @@
       font-size:12px;
     }
 
-    /* ===== Cart Drawer ===== */
     .overlay{
       position: fixed;
       inset: 0;
@@ -369,7 +366,6 @@
       font-weight: 900;
     }
 
-    /* ===== Flavors / Options Modal ===== */
     .flv-overlay{
       position: fixed;
       inset: 0;
@@ -397,7 +393,7 @@
       pointer-events:none;
       transition: opacity .2s ease, transform .2s ease;
       z-index: 130;
-      overflow: hidden; /* important for bottom bar */
+      overflow: hidden;
     }
     .flv-modal.show{
       opacity:1;
@@ -428,11 +424,10 @@
       padding: 12px 14px 14px;
       max-height: 65vh;
       overflow-y: auto;
-      padding-bottom: 110px; /* space for bottom add */
+      padding-bottom: 110px;
     }
     .flv-sub{ opacity:.85; font-weight: 800; margin-bottom: 10px; }
 
-    /* rows with counters (used for flavors + fruits) */
     .flv-grid{
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -473,7 +468,6 @@
       font-weight:900;
     }
 
-    /* bottom bar (fixed inside modal) */
     .flv-row{
       position: absolute;
       bottom: 0;
@@ -511,7 +505,6 @@
 
     .flv-hint{ font-weight:800; opacity:.85; text-align:center; }
 
-    /* ===== Points Modal ===== */
     .points-overlay{
       position:fixed;
       inset:0;
@@ -571,7 +564,6 @@
       cursor:pointer;
     }
 
-    /* ===== Mobile tuning ===== */
     @media (max-width:520px){
       .tabs{ gap:8px; padding:6px 8px 8px; }
       .tab{ padding:7px 10px; border-radius:14px; font-size:12px; }
@@ -615,36 +607,59 @@
     </div>
 
     <div class="tabs">
-      <div class="tab active" data-target="sec-pagota">ΠΑΓΩΤΑ</div>
-      <div class="tab" data-target="sec-fruity">FRUITY YOGURT</div>
-      <div class="tab" data-target="sec-xonakia">ΧΩΝΑΚΙΑ ΠΑΓΩΤΟΥ</div>
-      <div class="tab" data-target="sec-anapsyktika">ΑΝΑΨΥΧΤΙΚΑ</div>
+      <div class="tab active" data-target="sec-lava">ΛΑΒΑ ΦΙΣΤΙΚΙ</div>
+      <div class="tab" data-target="sec-pagota">ΠΑΓΩΤΑ</div>
+      <div class="tab" data-target="sec-stevia">STEVIA ΠΑΓΩΤΟ</div>
+      <div class="tab" data-target="sec-fruity">ΓΙΑΟΥΡΤΙ ΜΕ ΦΡΟΥΤΑ</div>
+      <div class="tab" data-target="sec-fruity-stevia">STEVIA ΠΑΓΩΤΟ ΓΙΑΟΥΡΤΙ</div>
+      <div class="tab" data-target="sec-xonakia">ΧΩΝΑΚΙΑ</div>
+      <div class="tab" data-target="sec-milkshakes">MILKSHAKES</div>
+      <div class="tab" data-target="sec-pota">ΠΟΤΑ</div>
     </div>
   </div>
 
   <main class="container">
+    <section class="section" id="sec-lava">
+      <div class="sectionTitle">ΛΑΒΑ ΦΙΣΤΙΚΙ</div>
+      <div class="list" id="list-lava"></div>
+    </section>
+
     <section class="section" id="sec-pagota">
       <div class="sectionTitle">ΠΑΓΩΤΑ</div>
       <div class="list" id="list-pagota"></div>
     </section>
 
+    <section class="section" id="sec-stevia">
+      <div class="sectionTitle">STEVIA ΠΑΓΩΤΟ</div>
+      <div class="list" id="list-stevia"></div>
+    </section>
+
     <section class="section" id="sec-fruity">
-      <div class="sectionTitle">FRUITY YOGURT</div>
+      <div class="sectionTitle">ΓΙΑΟΥΡΤΙ ΜΕ ΦΡΟΥΤΑ</div>
       <div class="list" id="list-fruity"></div>
     </section>
 
+    <section class="section" id="sec-fruity-stevia">
+      <div class="sectionTitle">STEVIA ΠΑΓΩΤΟ ΓΙΑΟΥΡΤΙ</div>
+      <div class="list" id="list-fruity-stevia"></div>
+    </section>
+
     <section class="section" id="sec-xonakia">
-      <div class="sectionTitle">ΧΩΝΑΚΙΑ ΠΑΓΩΤΟΥ</div>
+      <div class="sectionTitle">ΧΩΝΑΚΙΑ</div>
       <div class="list" id="list-xonakia"></div>
     </section>
 
-    <section class="section" id="sec-anapsyktika">
-      <div class="sectionTitle">ΑΝΑΨΥΧΤΙΚΑ</div>
-      <div class="list" id="list-anapsyktika"></div>
+    <section class="section" id="sec-milkshakes">
+      <div class="sectionTitle">MILKSHAKES</div>
+      <div class="list" id="list-milkshakes"></div>
+    </section>
+
+    <section class="section" id="sec-pota">
+      <div class="sectionTitle">ΠΟΤΑ</div>
+      <div class="list" id="list-pota"></div>
     </section>
   </main>
 
-  <!-- Cart drawer -->
   <div class="overlay" id="overlay"></div>
   <aside class="drawer" id="drawer">
     <div class="drawerHeader">
@@ -664,7 +679,6 @@
     </div>
   </aside>
 
-  <!-- Options modal -->
   <div class="flv-overlay" id="flvOverlay"></div>
 
   <div class="flv-modal" id="flvModal" role="dialog" aria-modal="true">
@@ -675,15 +689,10 @@
 
     <div class="flv-body">
       <div class="flv-sub" id="flvSub"></div>
-
-      <!-- Ice cream flavors -->
       <div class="flv-grid" id="flvFlavors" style="display:none;"></div>
-
-      <!-- Fruity yogurt fruits -->
       <div class="flv-grid" id="fruitChoices" style="display:none;"></div>
     </div>
 
-    <!-- bottom fixed area -->
     <div class="flv-row">
       <div class="flv-qty" id="qtyRow">
         <button class="qBtn" id="flvMinus" type="button">-</button>
@@ -696,7 +705,6 @@
     </div>
   </div>
 
-  <!-- CHECK POINTS MODAL -->
   <div class="points-overlay" id="pointsOverlay"></div>
   <div class="points-modal" id="pointsModal">
     <button class="points-close" type="button" onclick="closePointsModal()">✕</button>
@@ -749,37 +757,85 @@
   </script>
 
   <script>
-    /* ===== 1) PRODUCTS (EDIT HERE) ===== */
-    const FLAVORS = ["Βανίλια","Σοκολάτα","Φράουλα","Μαστίχα","Cookies","Φιστίκι","Μπανάνα","Καραμέλα"];
-    const FRUITS  = ["Φρούτα δάσους","Φράουλα","Μπανάνα"];
+    const FLAVORS = ["Βανίλια","Σοκολάτα","Φράουλα","Μαστίχα","Cookies","Φιστίκι","Μπανάνα","Καραμέλα","Γιαούρτι","Stracciatella","Pistachio","Rose Fraise","Melone","Frutty di Bosco","Coffee Mocha","Salted Caramel","After Eight","Pralina"];
+    const FRUITS = ["Φρούτα δάσους","Φράουλα","Μπανάνα","Ακτινίδιο","Μάνγκο","Ανανάς"];
 
     const PRODUCTS = {
+      lava: [
+        { id:"l1", name:"Λάβα Φιστίκι Αιγίνης", desc:"Πραλίνα φιστικιού με παγωτό και μπισκότο", price:7.00, image:"./images/lava-fistiki.jpeg", qtySelectable:true }
+      ], 
+
       pagota: [
-        { id:"p1", name:"Παγωτό Thermo Pack 3 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:6.00, image:"", scoops:3, flavors:FLAVORS },
-        { id:"p2", name:"Παγωτό Thermo Pack 4 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:7.00, image:"", scoops:4, flavors:FLAVORS },
-        { id:"p3", name:"Παγωτό Στέβια 3 Μπάλες", desc:"Γιαούρτι, σοκολάτα, φράουλα, ροδάκινο", price:7.00, image:"", scoops:3, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
-        { id:"p4", name:"Παγωτό Thermo Box 8 Μπάλες", desc:"Επιλέξτε ανάμεσα σε διαφορετικές γεύσεις", price:13.50, image:"", scoops:8, flavors:FLAVORS },
+        { id:"p1", name:"1 Μπάλα Παγωτό", desc:"", price:2.00, image:"./images/pagoto-1.jpeg", scoops:1, flavors:FLAVORS },
+        { id:"p2", name:"2 Μπάλες Παγωτό", desc:"", price:4.00, image:"./images/pagoto-2.jpeg", scoops:2, flavors:FLAVORS },
+        { id:"p3", name:"3 Μπάλες Παγωτό", desc:"", price:5.50, image:"./images/pagoto-3.jpeg", scoops:3, flavors:FLAVORS },
+        { id:"p4", name:"4 Μπάλες Παγωτό", desc:"", price:6.50, image:"./images/pagoto-4.jpeg", scoops:4, flavors:FLAVORS },
+        { id:"p5", name:"9 Μπάλες Family Thermo Box", desc:"9 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:14.50, image:"./images/family-9.jpeg", scoops:9, flavors:FLAVORS },
+        { id:"p6", name:"12 Μπάλες Family Thermo Box", desc:"12 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:17.50, image:"./images/family-12.jpeg", scoops:12, flavors:FLAVORS },
+        { id:"p7", name:"16 Μπάλες Family Thermo Box", desc:"16 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:22.50, image:"./images/family-16.jpeg", scoops:16, flavors:FLAVORS },
+        { id:"p8", name:"20 Μπάλες Family Thermo Box", desc:"20 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:30.00, image:"./images/stevia-box-24.jpeg", scoops:20, flavors:FLAVORS }
       ],
+
+      stevia: [
+        { id:"s1", name:"1 Μπάλα Παγωτό Stevia", desc:"", price:2.50, image:"./images/stevia-1.jpeg", scoops:1, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s2", name:"2 Μπάλες Παγωτό Stevia", desc:"", price:4.50, image:"./images/stevia-2.jpeg", scoops:2, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s3", name:"3 Μπάλες Παγωτό Stevia", desc:"", price:6.50, image:"./images/stevia-3.jpeg", scoops:3, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s4", name:"4 Μπάλες Παγωτό Stevia", desc:"", price:9.00, image:"./images/stevia-4.jpeg", scoops:4, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s5", name:"9 Μπάλες Παγωτό Stevia Family Thermo Box", desc:"9 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:17.50, image:"./images/stevia-box-9.jpeg", scoops:9, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s6", name:"12 Μπάλες Παγωτό Stevia Family Thermo Box", desc:"12 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:22.50, image:"./images/stevia-box-12.jpeg", scoops:12, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s7", name:"16 Μπάλες Παγωτό Stevia Family Thermo Box", desc:"16 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:27.50, image:"./images/stevia-box-16.jpeg", scoops:16, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] },
+        { id:"s8", name:"24 Μπάλες Παγωτό Stevia Family Thermo Box", desc:"24 μπάλες συμπεριλαμβανομένων 5 μικρών χωνάκια", price:38.00, image:"./images/stevia-box-24.jpeg", scoops:24, flavors:["Γιαούρτι","Σοκολάτα","Φράουλα","Ροδάκινο"] }
+      ],
+
       fruity: [
-        /* fruitMax = πόσα “fruits” θα βάλουν συνολικά (όπως scoops). Άλλαξέ το όποτε θέλεις */
-        { id:"f1", name:"Fruity Yogurt Bowl", desc:"Γιαούρτι + φρούτα + toppings", price:5.50, image:"", fruits:FRUITS, fruitMax:2 },
-        { id:"f2", name:"Fruity Yogurt Mini", desc:"Μικρό μέγεθος", price:4.00, image:"", fruits:FRUITS, fruitMax:2 },
+        { id:"f1", name:"Μικρό Παγωτό Γιαούρτι", desc:"Τα αγαπημένα σας φρούτα με 2 μπάλες παγωτό γιαούρτι", price:5.00, image:"./images/fruity-small.jpeg", fruits:FRUITS, fruitMax:2 },
+        { id:"f2", name:"Μέτριο Παγωτό Γιαούρτι", desc:"Τα αγαπημένα σας φρούτα με 3 μπάλες παγωτό γιαούρτι", price:6.50, image:"./images/fruity-medium.jpeg", fruits:FRUITS, fruitMax:3 },
+        { id:"f3", name:"Small Family Fruity Yogurt Thermo Box", desc:"Τα αγαπημένα σας φρούτα με 6 μπάλες παγωτό γιαούρτι", price:16.50, image:"./images/fruity-family-small.jpeg", fruits:FRUITS, fruitMax:4 },
+        { id:"f4", name:"Large Family Fruity Yogurt Thermo Box", desc:"Τα αγαπημένα σας φρούτα με 12 μπάλες γιαούρτι", price:26.50, image:"./images/fruity-family-large.jpeg", fruits:FRUITS, fruitMax:4 }
       ],
+
+      fruityStevia: [
+        { id:"fs1", name:"Μικρό Παγωτό Γιαούρτι Stevia", desc:"Τα αγαπημένα σας φρούτα με 2 μπάλες γιαούρτι", price:5.50, image:"./images/fruity-stevia-small.jpeg", fruits:FRUITS, fruitMax:2 },
+        { id:"fs2", name:"Μέτριο Παγωτό Γιαούρτι Stevia", desc:"Τα αγαπημένα σας φρούτα με 3 μπάλες γιαούρτι", price:7.00, image:"./images/fruity-stevia-medium.jpeg", fruits:FRUITS, fruitMax:3 },
+        { id:"fs3", name:"Small Family Stevia Fruity Yogurt Thermo Box", desc:"Τα αγαπημένα σας φρούτα με 6 μπάλες γιαούρτι", price:17.50, image:"./images/fruity-stevia-family-small.jpeg", fruits:FRUITS, fruitMax:4 },
+        { id:"fs4", name:"Large Family Stevia Fruity Yogurt Thermo Box", desc:"Τα αγαπημένα σας φρούτα με 12 μπάλες γιαούρτι", price:28.50, image:"./images/fruity-stevia-family-large.jpeg", fruits:FRUITS, fruitMax:4 }
+      ],
+
       xonakia: [
-        { id:"x1", name:"Χωνάκι 1 Μπάλα", desc:"Διάλεξε γεύση", price:2.50, image:"", scoops:1, flavors:FLAVORS },
-        { id:"x2", name:"Χωνάκι 2 Μπάλες", desc:"Διάλεξε γεύσεις", price:4.00, image:"", scoops:2, flavors:FLAVORS },
+        { id:"x1", name:"5 Χωνάκια", desc:"", price:0.00, image:"./images/xonakia-5.jpg", qtySelectable:true }
       ],
-      anapsyktika: [
-        /* qtySelectable=true => θα δείξει το - 1 + για ποσότητα */
-        { id:"a1", name:"Coca-Cola 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"", qtySelectable:true },
-        { id:"a2", name:"Sprite 330ml", desc:"Κρύο αναψυκτικό", price:1.80, image:"", qtySelectable:true },
-        { id:"a3", name:"Νερό 500ml", desc:"", price:1.00, image:"", qtySelectable:true },
+
+      milkshakes: [
+        { id:"m1", name:"Tutti Frutty Milkshake", desc:"Έκρηξη φράουλας, melone και frutty di Bosco", price:6.00, image:"./images/milkshake-tutti.jpeg", qtySelectable:true },
+        { id:"m2", name:"Rose Fraise Milkshake", desc:"Το κλασικό ρόφημα τριαντάφυλλου και γάλακτος", price:6.00, image:"./images/milkshake-rose.jpeg", qtySelectable:true },
+        { id:"m3", name:"Chocolate Dream Milkshake", desc:"Σοκολάτα με σοκολάτα και σοκολάτα!", price:6.00, image:"./images/milkshake-chocolate.jpeg", qtySelectable:true },
+        { id:"m4", name:"Pralina Ciao Milkshake", desc:"Κάντε το όπως οι Ιταλοί, με σοκολάτα, φουντούκι και πραλίνα", price:6.00, image:"./images/milkshake-pralina.jpeg", qtySelectable:true },
+        { id:"m5", name:"Coffee Mocha Milkshake", desc:"Milkshake με καφέ και σοκολατάκια", price:6.00, image:"./images/milkshake-mocha.jpeg", qtySelectable:true },
+        { id:"m6", name:"Caramel Latte Milkshake", desc:"Milkshake με καφέ, καραμέλα και με σιρόπι toffee", price:6.00, image:"./images/milkshake-caramel-latte.jpeg", qtySelectable:true },
+        { id:"m7", name:"Salted Caramel Milkshake", desc:"Signature αλατισμένη καραμέλα με σιρόπι καραμέλας", price:6.00, image:"./images/milkshake-salted-caramel.jpeg", qtySelectable:true },
+        { id:"m8", name:"Oreolove Milkshake", desc:"Cookies n cream, stracciatella, σιρόπι σοκολάτας", price:6.00, image:"./images/milkshake-oreolove.jpeg", qtySelectable:true },
+        { id:"m9", name:"After Eight Milkshake", desc:"Το μιλκσέικ πράσινο, μέντα και σοκολάτα", price:6.00, image:"./images/milkshake-after-eight.jpeg", qtySelectable:true }
+      ],
+
+      pota: [
+        { id:"d1", name:"Νερό", desc:"0.50 l", price:0.70, image:"./images/nero.jpeg", qtySelectable:true },
+        { id:"d2", name:"Lipton Ice Tea Λεμόνι 330ml", desc:"", price:1.80, image:"./images/lipton-lemon.jpeg", qtySelectable:true },
+        { id:"d3", name:"Lipton Ice Tea Ροδάκινο 330ml", desc:"", price:1.80, image:"./images/lipton-peach.jpeg", qtySelectable:true },
+        { id:"d4", name:"Ανθρακούχο Νερό Σουρωτή", desc:"", price:2.00, image:"./images/souroti.jpeg", qtySelectable:true },
+        { id:"d5", name:"Perrier 200 ml", desc:"", price:2.00, image:"./images/perrier-200.jpeg", qtySelectable:true },
+        { id:"d6", name:"Maison Perrier Lemon & Cucumber", desc:"", price:2.50, image:"./images/maison-lemon-cucumber.jpeg", qtySelectable:true },
+        { id:"d7", name:"Maison Perrier Pineapple & Mango", desc:"", price:2.50, image:"./images/maison-pineapple-mango.jpeg", qtySelectable:true },
+        { id:"d8", name:"Maison Perrier Λάιμ", desc:"", price:2.50, image:"./images/maison-lime.jpeg", qtySelectable:true },
+        { id:"d9", name:"Maison Perrier Γκρέιπφρουτ", desc:"", price:2.50, image:"./images/maison-grapefruit.jpeg", qtySelectable:true },
+        { id:"d10", name:"Keanita Orange", desc:"", price:1.50, image:"./images/keanita-orange.jpeg", qtySelectable:true },
+        { id:"d11", name:"Παγωμένη Coca Cola Τενεκεδάκι", desc:"", price:1.80, image:"./images/coca-cola.png", qtySelectable:true },
+        { id:"d12", name:"7UP", desc:"", price:1.80, image:"./images/7up.png", qtySelectable:true },
+        { id:"d13", name:"Coca Cola Zero", desc:"", price:1.80, image:"./images/coca-cola-zero.png", qtySelectable:true }
       ]
     };
 
-    /* ===== 2) HELPERS ===== */
     function euro(n){ return "€" + n.toFixed(2).replace(".", ","); }
-    function allItems(){ return [...PRODUCTS.pagota, ...PRODUCTS.fruity, ...PRODUCTS.xonakia, ...PRODUCTS.anapsyktika]; }
+    function allItems(){ return [...PRODUCTS.lava, ...PRODUCTS.pagota, ...PRODUCTS.stevia, ...PRODUCTS.fruity, ...PRODUCTS.fruityStevia, ...PRODUCTS.xonakia, ...PRODUCTS.milkshakes, ...PRODUCTS.pota]; }
     function baseId(key){ return key.split("|")[0]; }
     function flavorText(key){ const p = key.split("|"); return p[1] ? p[1].trim() : ""; }
     function findItem(key){ return allItems().find(x => x.id === baseId(key)); }
@@ -799,7 +855,6 @@
       return Object.values(countsObj).reduce((a,b)=>a+b,0);
     }
 
-    /* ===== 3) RENDER CARDS ===== */
     function cardHTML(item){
       const img = item.image
         ? `<img src="${item.image}" alt="${item.name}">`
@@ -823,15 +878,18 @@
     }
 
     function render(){
+      document.getElementById("list-lava").innerHTML = PRODUCTS.lava.map(cardHTML).join("");
       document.getElementById("list-pagota").innerHTML = PRODUCTS.pagota.map(cardHTML).join("");
+      document.getElementById("list-stevia").innerHTML = PRODUCTS.stevia.map(cardHTML).join("");
       document.getElementById("list-fruity").innerHTML = PRODUCTS.fruity.map(cardHTML).join("");
+      document.getElementById("list-fruity-stevia").innerHTML = PRODUCTS.fruityStevia.map(cardHTML).join("");
       document.getElementById("list-xonakia").innerHTML = PRODUCTS.xonakia.map(cardHTML).join("");
-      document.getElementById("list-anapsyktika").innerHTML = PRODUCTS.anapsyktika.map(cardHTML).join("");
+      document.getElementById("list-milkshakes").innerHTML = PRODUCTS.milkshakes.map(cardHTML).join("");
+      document.getElementById("list-pota").innerHTML = PRODUCTS.pota.map(cardHTML).join("");
     }
 
-    /* ===== 4) CART (localStorage) ===== */
-    const CART_KEY = "pahitice_cart_v3";
-    let cart = JSON.parse(localStorage.getItem(CART_KEY) || "{}"); // { key: qty }
+    const CART_KEY = "pahitice_cart_v4";
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || "{}");
 
     function saveCart(){
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -893,7 +951,6 @@
       }).join("");
     }
 
-    /* ===== 5) TABS (click -> scroll) ===== */
     document.querySelectorAll(".tab").forEach(tab=>{
       tab.addEventListener("click", ()=>{
         const id = tab.dataset.target;
@@ -901,7 +958,7 @@
       });
     });
 
-    const sections = ["sec-pagota","sec-fruity","sec-xonakia","sec-anapsyktika"].map(id=>document.getElementById(id));
+    const sections = ["sec-lava","sec-pagota","sec-stevia","sec-fruity","sec-fruity-stevia","sec-xonakia","sec-milkshakes","sec-pota"].map(id=>document.getElementById(id));
     const tabs = [...document.querySelectorAll(".tab")];
 
     const obs = new IntersectionObserver((entries)=>{
@@ -913,7 +970,6 @@
 
     sections.forEach(s=>obs.observe(s));
 
-    /* ===== 6) CART drawer open/close ===== */
     const overlay = document.getElementById("overlay");
     const drawer  = document.getElementById("drawer");
 
@@ -933,7 +989,6 @@
     document.getElementById("clearBtn").addEventListener("click", clearCart);
     document.getElementById("checkoutBtn").addEventListener("click", ()=>alert("Εδώ μετά βάζουμε checkout/στοιχεία πελάτη."));
 
-    /* ===== 7) OPTIONS MODAL ===== */
     const flvOverlay = document.getElementById("flvOverlay");
     const flvModal   = document.getElementById("flvModal");
     const flvTitle   = document.getElementById("flvTitle");
@@ -950,29 +1005,24 @@
 
     let currentItem = null;
     let qty = 1;
-
-    let flavorCounts = {}; // for ice cream
-    let fruitCounts  = {}; // for fruity yogurt
+    let flavorCounts = {};
+    let fruitCounts  = {};
 
     function openOptionsModal(item){
       currentItem = item;
       qty = 1;
       flvQtyEl.textContent = qty;
       flvTitle.textContent = item.name;
-
-      // reset ui
       flvHint.textContent = "";
       flvFlavors.innerHTML = "";
       fruitChoices.innerHTML = "";
       flvFlavors.style.display = "none";
       fruitChoices.style.display = "none";
 
-      // decide what user is selecting
       const hasScoops = item.scoops && item.flavors && item.flavors.length;
       const hasFruits = item.fruits && item.fruits.length;
       const wantsQty  = !!item.qtySelectable;
 
-      // show qty only for drinks (or any item with qtySelectable)
       qtyRow.style.display = wantsQty ? "flex" : "none";
 
       if(hasScoops){
@@ -997,7 +1047,7 @@
 
       } else if(hasFruits){
         const max = item.fruitMax ?? 2;
-        flvSub.textContent = `Διάλεξε ${max} φρούτα (μπορείς και ίδια πολλές φορές)`;
+        flvSub.textContent = `Διάλεξε ${max} φρούτα`;
         fruitChoices.style.display = "grid";
         fruitCounts = {};
         item.fruits.forEach(n => fruitCounts[n] = 0);
@@ -1017,7 +1067,6 @@
         });
 
       } else {
-        // simple item (if not qtySelectable, add 1)
         flvSub.textContent = wantsQty ? "Διάλεξε ποσότητα:" : "Προσθήκη στο καλάθι";
       }
 
@@ -1032,12 +1081,10 @@
     }
 
     function refreshCountsUI(){
-      // flavors
       Object.keys(flavorCounts).forEach(name=>{
         const el = flvFlavors.querySelector(`[data-flv-count="${CSS.escape(name)}"]`);
         if(el) el.textContent = flavorCounts[name];
       });
-      // fruits
       Object.keys(fruitCounts).forEach(name=>{
         const el = fruitChoices.querySelector(`[data-fr-count="${CSS.escape(name)}"]`);
         if(el) el.textContent = fruitCounts[name];
@@ -1068,14 +1115,12 @@
       }
     }
 
-    // qty buttons (only when qtyRow is visible)
     flvMinus.addEventListener("click", ()=>{ qty = Math.max(1, qty-1); flvQtyEl.textContent = qty; });
     flvPlus.addEventListener("click", ()=>{ qty = qty+1; flvQtyEl.textContent = qty; });
 
     flvClose.addEventListener("click", closeOptionsModal);
     flvOverlay.addEventListener("click", closeOptionsModal);
 
-    // plus/minus counters (event delegation)
     flvFlavors.addEventListener("click", (e)=>{
       if(!currentItem) return;
       const hasScoops = currentItem.scoops && currentItem.flavors && currentItem.flavors.length;
@@ -1131,7 +1176,6 @@
         if(totalSelected(flavorCounts) !== currentItem.scoops) return;
         const label = makeLabelFromCounts("Γεύσεις", flavorCounts);
         key = makeKey(currentItem, [label]);
-
         cart[key] = (cart[key] || 0) + 1;
 
       } else if(hasFruits){
@@ -1139,11 +1183,9 @@
         if(totalSelected(fruitCounts) !== need) return;
         const label = makeLabelFromCounts("Φρούτα", fruitCounts);
         key = makeKey(currentItem, [label]);
-
         cart[key] = (cart[key] || 0) + 1;
 
       } else {
-        // drinks (qty) or simple item
         const addQty = wantsQty ? qty : 1;
         cart[key] = (cart[key] || 0) + addQty;
       }
@@ -1152,7 +1194,6 @@
       closeOptionsModal();
     });
 
-    /* ===== 8) CLICK HANDLERS (Event delegation) ===== */
     document.addEventListener("click", (e)=>{
       const openId = e.target.closest("[data-open]")?.dataset.open;
       if(openId){
@@ -1167,7 +1208,6 @@
       if(decKey) dec(decKey);
     });
 
-    /* INIT */
     render();
     updateCartUI();
   </script>
