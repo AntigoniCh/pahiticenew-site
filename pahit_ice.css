@@ -98,9 +98,7 @@ body > *{
 .side-menu a:hover{
   transform: scale(1.08);
 }
-img[src*="./bolt logo/bolt-food-seeklogo.png"]{
-  transform: scale(1.2) translateY(2px);
-}
+
 
 /* colors */
 .side-menu .fa-instagram{ color: #dd1d40; }
